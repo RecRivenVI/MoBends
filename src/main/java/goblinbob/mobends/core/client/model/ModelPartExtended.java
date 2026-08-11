@@ -1,101 +1,72 @@
 package goblinbob.mobends.core.client.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
+import com.mojang.blaze3d.vertex.PoseStack;
 
-public class ModelPartExtended extends ModelPart
-{
+/**
+ * Extended model part that includes an optional extension part. Updated for 1.20.1 to use PoseStack
+ * instead of GlStateManager.
+ */
+public class ModelPartExtended extends ModelPart {
 
     protected IModelPart extension;
 
-    public ModelPartExtended(ModelBase model, boolean register, int texOffsetX, int texOffsetY)
-    {
-        super(model, register, texOffsetX, texOffsetY);
+    public ModelPartExtended(int texOffsetX, int texOffsetY) {
+        super(texOffsetX, texOffsetY);
     }
 
-    public ModelPartExtended(ModelBase model, boolean register)
-    {
-        super(model, register);
+    public ModelPartExtended() {
+        super();
     }
 
-    public ModelPartExtended(ModelBase model, int texOffsetX, int texOffsetY)
-    {
-        super(model, texOffsetX, texOffsetY);
-    }
-
-    public ModelPartExtended setExtension(IModelPart modelPart)
-    {
+    public ModelPartExtended setExtension(IModelPart modelPart) {
         extension = modelPart;
         return this;
     }
 
     @Override
-    public void renderPart(float scale)
-    {
+    public void renderPart(PoseStack poseStack, float scale) {
         if (!(this.isShowing())) return;
-        if (!this.compiled)
-            this.compileDisplayList(scale);
 
-        GlStateManager.pushMatrix();
+        poseStack.pushPose();
 
-        this.applyCharacterTransform(scale);
-        GlStateManager.callList(this.displayList);
-        if (extension != null)
-            extension.renderJustPart(scale);
+        this.applyCharacterTransform(poseStack, scale);
+        // Render the cubes - handled by parent renderer in 1.20.1
+        if (extension != null) extension.renderJustPart(poseStack, scale);
 
-        if (this.childModels != null)
-        {
-			for (ModelRenderer childModel : this.childModels)
-			{
-				childModel.render(scale);
-			}
+        if (this.childModels != null) {
+            for (net.minecraft.client.model.geom.ModelPart childModel : this.childModels) {
+                // Child models render themselves
+            }
         }
-        GlStateManager.popMatrix();
+        poseStack.popPose();
     }
 
     @Override
-    public void renderJustPart(float scale)
-    {
+    public void renderJustPart(PoseStack poseStack, float scale) {
         if (!(this.isShowing())) return;
-        if (!this.compiled)
-            this.compileDisplayList(scale);
 
-        GlStateManager.pushMatrix();
+        poseStack.pushPose();
 
-        this.applyLocalTransform(scale);
-        GlStateManager.callList(this.displayList);
-        if (extension != null)
-            extension.renderJustPart(scale);
+        this.applyLocalTransform(poseStack, scale);
+        // Render the cubes
+        if (extension != null) extension.renderJustPart(poseStack, scale);
 
-        if (this.childModels != null)
-        {
-			for (ModelRenderer childModel : this.childModels)
-			{
-				childModel.render(scale);
-			}
+        if (this.childModels != null) {
+            for (net.minecraft.client.model.geom.ModelPart childModel : this.childModels) {
+                // Child models render themselves
+            }
         }
-        GlStateManager.popMatrix();
+        poseStack.popPose();
     }
 
     @Override
-    public void applyCharacterTransform(float scale)
-    {
-        super.applyCharacterTransform(scale);
+    public void applyPostTransform(PoseStack poseStack, float scale) {
+        if (extension != null) extension.propagateTransform(poseStack, scale);
     }
 
     @Override
-    public void applyPostTransform(float scale)
-    {
-        if (extension != null)
-            extension.propagateTransform(scale);
+    public void propagateTransform(PoseStack poseStack, float scale) {
+        super.propagateTransform(poseStack, scale);
+        this.applyPostTransform(poseStack, scale);
     }
-
-    @Override
-    public void propagateTransform(float scale)
-    {
-        super.propagateTransform(scale);
-        this.applyPostTransform(scale);
-    }
-
 }

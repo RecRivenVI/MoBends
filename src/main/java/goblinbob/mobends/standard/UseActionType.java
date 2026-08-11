@@ -1,7 +1,6 @@
 package goblinbob.mobends.standard;
 
-public enum UseActionType
-{
+public enum UseActionType {
     FOOD,
     BOW,
     SHIELD,

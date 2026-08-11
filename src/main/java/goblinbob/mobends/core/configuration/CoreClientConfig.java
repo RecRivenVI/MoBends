@@ -1,64 +1,228 @@
 package goblinbob.mobends.core.configuration;
 
-import goblinbob.mobends.core.bender.EntityBender;
-import goblinbob.mobends.core.bender.EntityBenderRegistry;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import net.minecraft.client.Minecraft;
+import org.slf4j.Logger;
 
-public class CoreClientConfig extends CoreConfig
-{
-    private static final String[] emptyStringList = new String[0];
+/** Client-side configuration with JSON persistence. */
+public class CoreClientConfig {
+    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final String CONFIG_FILE_NAME = "mobends-client.json";
 
-    // General
-    private static final String CATEGORY_GENERAL = "General";
-    private static final String PROP_APPLIED_PACKS = "AppliedPacks";
+    private static CoreClientConfig instance;
 
-    // Animated
-    private static final String CATEGORY_ANIMATED = "Animated";
+    private File configFile;
+    private ConfigData data = new ConfigData();
+    private boolean initialized = false;
 
-    public String[] appliedPackKeys;
-
-    public CoreClientConfig(File file)
-    {
-        super(file);
-        appliedPackKeys = new String[] {};
-        load();
+    public static CoreClientConfig getInstance() {
+        if (instance == null) {
+            instance = new CoreClientConfig();
+        }
+        return instance;
     }
 
-    public void save()
-    {
-        for (EntityBender<?> entityBender : EntityBenderRegistry.instance.getRegistered())
-        {
-            configuration.get(CATEGORY_ANIMATED, entityBender.getKey(), true).setValue(entityBender.isAnimated());
+    /**
+     * Initialize config file path and load from disk. Must be called after Minecraft is available.
+     */
+    public void initialize() {
+        if (initialized) return;
+
+        try {
+            File gameDir = Minecraft.getInstance().gameDirectory;
+            File configDir = new File(gameDir, "config");
+            configDir.mkdirs();
+            this.configFile = new File(configDir, CONFIG_FILE_NAME);
+            load();
+            initialized = true;
+        } catch (Exception e) {
+            LOGGER.error("Failed to initialize MoBends config", e);
+        }
+    }
+
+    private void load() {
+        if (configFile == null || !configFile.exists()) {
+            data = new ConfigData();
+            LOGGER.info("MoBends config file not found, creating defaults");
+            save();
+            return;
         }
 
-        configuration.save();
+        try (FileReader reader = new FileReader(configFile)) {
+            ConfigData loaded = GSON.fromJson(reader, ConfigData.class);
+            if (loaded != null) {
+                this.data = loaded.normalized();
+                LOGGER.info(
+                        "Loaded MoBends config: {} entity overrides, {} applied packs",
+                        data.enabledEntities.size(),
+                        data.appliedPacks.size());
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to load MoBends config", e);
+        }
     }
 
-    public void load()
-    {
-        appliedPackKeys = configuration.get(CATEGORY_GENERAL, PROP_APPLIED_PACKS, emptyStringList).getStringList();
+    /** Reloads manually edited settings without recreating the client core. */
+    public void reload() {
+        if (configFile != null) {
+            load();
+        }
     }
 
-    public String[] getAppliedPacks()
-    {
-        return appliedPackKeys;
+    private void save() {
+        if (configFile == null) {
+            LOGGER.warn("Config file not initialized, cannot save");
+            return;
+        }
+
+        try (FileWriter writer = new FileWriter(configFile)) {
+            GSON.toJson(data, writer);
+        } catch (IOException e) {
+            LOGGER.error("Failed to save MoBends config", e);
+        }
     }
 
-    public void setAppliedPacks(String[] packNames)
-    {
-        appliedPackKeys = packNames;
-        configuration.get(CATEGORY_GENERAL, PROP_APPLIED_PACKS, emptyStringList).set(packNames);
+    public List<String> getAppliedPacks() {
+        return new ArrayList<>(data.appliedPacks);
     }
 
-    public void setAppliedPacks(Collection<String> packNames)
-    {
-        setAppliedPacks(packNames.toArray(new String[0]));
+    public void setAppliedPacks(List<String> packs) {
+        data.appliedPacks = new ArrayList<>(packs);
+        save();
     }
 
-    public boolean isEntityAnimated(String alterEntryKey)
-    {
-        return configuration.get(CATEGORY_ANIMATED, alterEntryKey, true).getBoolean();
+    public boolean isEntityEnabled(String entity) {
+        return data.enabledEntities.getOrDefault(entity, true);
+    }
+
+    public void setEntityEnabled(String entity, boolean enabled) {
+        data.enabledEntities.put(entity, enabled);
+        save();
+    }
+
+    public void setShowSwordTrail(boolean enabled) {
+        data.showSwordTrail = enabled;
+        save();
+    }
+
+    public void setShowArrowTrails(boolean enabled) {
+        data.showArrowTrails = enabled;
+        save();
+    }
+
+    public void setPerformSpinAttack(boolean enabled) {
+        data.performSpinAttack = enabled;
+        save();
+    }
+
+    public void setAdvancedPatterns(
+            List<String> itemUseClassifications,
+            List<String> itemAttackClassifications,
+            List<String> keepArmorAsVanilla,
+            List<String> keepEntityAsVanilla) {
+        data.itemUseClassifications = normalizedList(itemUseClassifications);
+        data.itemAttackClassifications = normalizedList(itemAttackClassifications);
+        data.keepArmorAsVanilla = normalizedList(keepArmorAsVanilla);
+        data.keepEntityAsVanilla = normalizedList(keepEntityAsVanilla);
+        save();
+    }
+
+    public void ensureEntityDefaults(Collection<String> entityKeys) {
+        boolean changed = false;
+        List<String> sortedKeys = new ArrayList<>(entityKeys);
+        Collections.sort(sortedKeys);
+        for (String entityKey : sortedKeys) {
+            if (!data.enabledEntities.containsKey(entityKey)) {
+                data.enabledEntities.put(entityKey, true);
+                changed = true;
+            }
+        }
+        if (changed) {
+            save();
+        }
+    }
+
+    public boolean isEntityAnimated(String entity) {
+        return isEntityEnabled(entity);
+    }
+
+    public List<String> getItemUseClassifications() {
+        return copyOf(data.itemUseClassifications);
+    }
+
+    public List<String> getItemAttackClassifications() {
+        return copyOf(data.itemAttackClassifications);
+    }
+
+    public List<String> getKeepArmorAsVanilla() {
+        return copyOf(data.keepArmorAsVanilla);
+    }
+
+    public List<String> getKeepEntityAsVanilla() {
+        return copyOf(data.keepEntityAsVanilla);
+    }
+
+    public boolean isShowSwordTrail() {
+        return data.showSwordTrail;
+    }
+
+    public boolean isShowArrowTrails() {
+        return data.showArrowTrails;
+    }
+
+    public boolean isPerformSpinAttack() {
+        return data.performSpinAttack;
+    }
+
+    private static List<String> copyOf(List<String> values) {
+        return values == null ? Collections.emptyList() : new ArrayList<>(values);
+    }
+
+    private static List<String> normalizedList(List<String> values) {
+        LinkedHashSet<String> result = new LinkedHashSet<>();
+        if (values != null) {
+            for (String value : values) {
+                if (value != null && !value.trim().isEmpty()) {
+                    result.add(value.trim());
+                }
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
+    private static class ConfigData {
+        List<String> appliedPacks = new ArrayList<>();
+        Map<String, Boolean> enabledEntities = new HashMap<>();
+        List<String> itemUseClassifications = new ArrayList<>();
+        List<String> itemAttackClassifications = new ArrayList<>();
+        List<String> keepArmorAsVanilla = new ArrayList<>();
+        List<String> keepEntityAsVanilla = new ArrayList<>();
+        boolean showSwordTrail = true;
+        boolean showArrowTrails = true;
+        boolean performSpinAttack = true;
+
+        ConfigData normalized() {
+            if (appliedPacks == null) appliedPacks = new ArrayList<>();
+            if (enabledEntities == null) enabledEntities = new HashMap<>();
+            if (itemUseClassifications == null) itemUseClassifications = new ArrayList<>();
+            if (itemAttackClassifications == null) itemAttackClassifications = new ArrayList<>();
+            if (keepArmorAsVanilla == null) keepArmorAsVanilla = new ArrayList<>();
+            if (keepEntityAsVanilla == null) keepEntityAsVanilla = new ArrayList<>();
+            return this;
+        }
     }
 }

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "mobends",
+  "version": "${mod_version}",
+  "name": "Mo' Bends",
+  "description": "Mo' Bends adds expressive and fluid animations to Minecraft players and creatures.",
+  "authors": [
+    "RecRivenVI"
+  ],
+  "contact": {
+    "homepage": "https://github.com/RecRivenVI/MoBends",
+    "sources": "https://github.com/RecRivenVI/MoBends",
+    "issues": "https://github.com/RecRivenVI/MoBends/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/mobends/textures/logo512.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "goblinbob.mobends.fabric.main.MoBends"
+    ],
+    "client": [
+      "goblinbob.mobends.fabric.main.MoBendsClient"
+    ],
+    "modmenu": [
+      "goblinbob.mobends.fabric.client.MoBendsModMenu"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "mobends-fabric.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": "${loader_version_range}",
+    "minecraft": "${minecraft_version_range}",
+    "java": ">=${java_version}",
+    "fabric-api": "*"
+  }
+}

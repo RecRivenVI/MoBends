@@ -1,7 +1,6 @@
 package goblinbob.mobends.standard;
 
-public enum AttackActionType
-{
+public enum AttackActionType {
     TOOL,
     FISTS,
     SWORD,

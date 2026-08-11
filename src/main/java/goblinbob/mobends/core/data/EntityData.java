@@ -2,26 +2,27 @@ package goblinbob.mobends.core.data;
 
 import goblinbob.mobends.core.animation.controller.IAnimationController;
 import goblinbob.mobends.core.client.event.DataUpdateHandler;
-import goblinbob.mobends.core.client.model.IBendsModel;
-import goblinbob.mobends.core.math.SmoothOrientation;
-import goblinbob.mobends.core.math.vector.SmoothVector3f;
 import goblinbob.mobends.core.pack.state.PackAnimationState;
-import goblinbob.mobends.core.util.GUtil;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockStaticLiquid;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-
+import goblinbob.mobends.lib.client.model.IBendsModel;
+import goblinbob.mobends.lib.math.SmoothOrientation;
+import goblinbob.mobends.lib.math.vector.SmoothVector3f;
+import goblinbob.mobends.lib.util.GUtil;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.StreamSupport;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
-public abstract class EntityData<E extends Entity> implements IBendsModel
-{
+public abstract class EntityData<E extends Entity> implements IBendsModel {
 
     protected int entityID;
     protected final E entity;
@@ -42,15 +43,13 @@ public abstract class EntityData<E extends Entity> implements IBendsModel
 
     public final PackAnimationState packAnimationState;
 
-    public EntityData(E entity)
-    {
+    public EntityData(E entity) {
         this.entity = entity;
-        if (this.entity != null)
-        {
-            this.entityID = entity.getEntityId();
-            this.positionX = this.entity.posX;
-            this.positionY = this.entity.posY;
-            this.positionZ = this.entity.posZ;
+        if (this.entity != null) {
+            this.entityID = entity.getId();
+            this.positionX = this.entity.getX();
+            this.positionY = this.entity.getY();
+            this.positionZ = this.entity.getZ();
         }
 
         this.motionX = this.prevMotionX = 0.0D;
@@ -62,28 +61,23 @@ public abstract class EntityData<E extends Entity> implements IBendsModel
         this.initModelPose();
     }
 
-    public void overrideOnGroundState(boolean state)
-    {
+    public void overrideOnGroundState(boolean state) {
         this.onGroundOverride = state;
     }
 
-    public void unsetOnGroundStateOverride()
-    {
+    public void unsetOnGroundStateOverride() {
         this.onGroundOverride = null;
     }
 
-    public void overrideStillness(boolean stillness)
-    {
+    public void overrideStillness(boolean stillness) {
         this.stillnessOverride = stillness;
     }
 
-    public void unsetStillnessOverride()
-    {
+    public void unsetStillnessOverride() {
         this.stillnessOverride = null;
     }
 
-    public void initModelPose()
-    {
+    public void initModelPose() {
         this.globalOffset = new SmoothVector3f();
         this.localOffset = new SmoothVector3f();
         this.renderRotation = new SmoothOrientation();
@@ -94,139 +88,168 @@ public abstract class EntityData<E extends Entity> implements IBendsModel
     }
 
     /**
-     * Updates all the model's parts to be in their next frame. Called in {@code EntityData.update()}
+     * Updates all the model's parts to be in their next frame. Called in {@code
+     * EntityData.update()}
      */
-    public void updateParts(float ticksPerFrame)
-    {
+    public void updateParts(float ticksPerFrame) {
         this.globalOffset.update(ticksPerFrame);
         this.localOffset.update(ticksPerFrame);
         this.renderRotation.update(ticksPerFrame);
         this.centerRotation.update(ticksPerFrame);
     }
 
-    public boolean calcOnGround()
-    {
-        if (this.onGroundOverride != null)
-            return this.onGroundOverride;
+    public boolean calcOnGround() {
+        if (this.onGroundOverride != null) return this.onGroundOverride;
 
         // Checking if we're going down stairs.
-        BlockPos position = new BlockPos(Math.floor(entity.posX), Math.floor(entity.posY), Math.floor(entity.posZ));
+        BlockPos position =
+                new BlockPos(
+                        Mth.floor(entity.getX()),
+                        Mth.floor(entity.getY()),
+                        Mth.floor(entity.getZ()));
 
-        IBlockState block = entity.world.getBlockState(position);
-        IBlockState blockBelow = entity.world.getBlockState(position.add(0, -1, 0));
-    
-        if (motionY <= 0 && (block.getBlock() instanceof BlockStairs || blockBelow.getBlock() instanceof BlockStairs))
-            return true;
+        BlockState block = entity.level().getBlockState(position);
+        BlockState blockBelow = entity.level().getBlockState(position.offset(0, -1, 0));
+
+        if (motionY <= 0
+                && (block.getBlock() instanceof StairBlock
+                        || blockBelow.getBlock() instanceof StairBlock)) return true;
 
         // Checking collisions.
-        List<AxisAlignedBB> list = entity.world.getCollisionBoxes(entity, entity.getEntityBoundingBox().offset(0, -0.125F, 0));
+        Iterable<net.minecraft.world.phys.shapes.VoxelShape> collisions =
+                entity.level()
+                        .getBlockCollisions(entity, entity.getBoundingBox().move(0, -0.125F, 0));
+        List<AABB> list =
+                StreamSupport.stream(collisions.spliterator(), false)
+                        .map(voxelShape -> voxelShape.bounds())
+                        .toList();
         return list.size() > 0;
     }
 
-    public boolean calcCollidedHorizontally()
-    {
-        List<AxisAlignedBB> list = entity.world.getCollisionBoxes(entity,
-                entity.getEntityBoundingBox().offset(this.motionX, 0, this.motionZ));
+    public boolean calcCollidedHorizontally() {
+        Iterable<net.minecraft.world.phys.shapes.VoxelShape> collisions =
+                entity.level()
+                        .getBlockCollisions(
+                                entity,
+                                entity.getBoundingBox().move(this.motionX, 0, this.motionZ));
+        List<AABB> list =
+                StreamSupport.stream(collisions.spliterator(), false)
+                        .map(voxelShape -> voxelShape.bounds())
+                        .toList();
 
         return list.size() > 0;
     }
 
-    public double getPositionX() { return this.positionX; }
+    public double getPositionX() {
+        return this.positionX;
+    }
 
-    public double getPositionY() { return this.positionY; }
+    public double getPositionY() {
+        return this.positionY;
+    }
 
-    public double getPositionZ() { return this.positionZ; }
+    public double getPositionZ() {
+        return this.positionZ;
+    }
 
-    public double getMotionX() { return this.motionX; }
+    public double getMotionX() {
+        return this.motionX;
+    }
 
-    public double getMotionY() { return this.motionY; }
+    public double getMotionY() {
+        return this.motionY;
+    }
 
-    public double getMotionZ() { return this.motionZ; }
+    public double getMotionZ() {
+        return this.motionZ;
+    }
 
-    public double getPrevMotionX() { return this.prevMotionX; }
+    public double getPrevMotionX() {
+        return this.prevMotionX;
+    }
 
-    public double getPrevMotionY() { return this.prevMotionY; }
+    public double getPrevMotionY() {
+        return this.prevMotionY;
+    }
 
-    public double getPrevMotionZ() { return this.prevMotionZ; }
+    public double getPrevMotionZ() {
+        return this.prevMotionZ;
+    }
 
-    public double getInterpolatedMotionX() { return this.prevMotionX + (this.motionX - this.prevMotionX) * DataUpdateHandler.partialTicks; }
+    public double getInterpolatedMotionX() {
+        return this.prevMotionX
+                + (this.motionX - this.prevMotionX) * DataUpdateHandler.partialTicks;
+    }
 
-    public double getInterpolatedMotionY() { return this.prevMotionY + (this.motionY - this.prevMotionY) * DataUpdateHandler.partialTicks; }
+    public double getInterpolatedMotionY() {
+        return this.prevMotionY
+                + (this.motionY - this.prevMotionY) * DataUpdateHandler.partialTicks;
+    }
 
-    public double getInterpolatedMotionZ() { return this.prevMotionZ + (this.motionZ - this.prevMotionZ) * DataUpdateHandler.partialTicks; }
+    public double getInterpolatedMotionZ() {
+        return this.prevMotionZ
+                + (this.motionZ - this.prevMotionZ) * DataUpdateHandler.partialTicks;
+    }
 
-    public boolean isOnGround()
-    {
+    public boolean isOnGround() {
         return this.onGround;
     }
 
-    public boolean isStillHorizontally()
-    {
+    public boolean isStillHorizontally() {
         // The motion value that is the threshold for determining movement.
         final double deadZone = 0.0025;
-        final double horizontalSqMagnitude = this.motionX * this.motionX + this.motionZ * this.motionZ;
-        return this.stillnessOverride != null ? this.stillnessOverride : horizontalSqMagnitude < deadZone;
+        final double horizontalSqMagnitude =
+                this.motionX * this.motionX + this.motionZ * this.motionZ;
+        return this.stillnessOverride != null
+                ? this.stillnessOverride
+                : horizontalSqMagnitude < deadZone;
     }
 
     public abstract IAnimationController<?> getController();
 
-    /**
-     * Called during the render tick in {@code EntityDatabase.updateRender()}
-     */
-    public void update(float partialTicks)
-    {
-        if (this.entity == null)
-            return;
+    /** Called during the render tick in {@code EntityDatabase.updateRender()} */
+    public void update(float partialTicks) {
+        if (this.entity == null) return;
 
         this.updateParts(DataUpdateHandler.ticksPerFrame);
     }
 
-    public E getEntity()
-    {
+    public E getEntity() {
         return this.entity;
     }
 
-    public float getLookAngle()
-    {
-        final Vec3d lookVec = this.entity.getLookVec();
+    public float getLookAngle() {
+        final Vec3 lookVec = this.entity.getLookAngle();
         return (float) GUtil.angleFromCoordinates(lookVec.x, lookVec.z);
     }
 
-    private float getWorldMovementAngle()
-    {
+    private float getWorldMovementAngle() {
         return (float) GUtil.angleFromCoordinates(this.motionX, this.motionZ);
     }
 
-    public float getMovementAngle()
-    {
-        if (isStillHorizontally())
-            return 0;
+    public float getMovementAngle() {
+        if (isStillHorizontally()) return 0;
         return this.getWorldMovementAngle() - this.getLookAngle();
     }
 
-    public double getForwardMomentum()
-    {
-        if (isStillHorizontally())
-            return 0;
+    public double getForwardMomentum() {
+        if (isStillHorizontally()) return 0;
 
-        final Vec3d lookVec = this.entity.getLookVec();
-        final Vec3d lookVecHorizontal = new Vec3d(lookVec.x, 0, lookVec.z).normalize();
+        final Vec3 lookVec = this.entity.getLookAngle();
+        final Vec3 lookVecHorizontal = new Vec3(lookVec.x, 0, lookVec.z).normalize();
         return lookVecHorizontal.x * this.motionX + lookVecHorizontal.z * this.motionZ;
     }
 
-    public double getSidewaysMomentum()
-    {
-        if (isStillHorizontally())
-            return 0;
-        Vec3d rightVec = entity.getLookVec().rotateYaw(-GUtil.PI / 2.0F);
-        Vec3d rightVecHorizontal = new Vec3d(rightVec.x, 0, rightVec.z).normalize();
+    public double getSidewaysMomentum() {
+        if (isStillHorizontally()) return 0;
+        Vec3 rightVec = entity.getLookAngle().yRot(-GUtil.PI / 2.0F);
+        Vec3 rightVecHorizontal = new Vec3(rightVec.x, 0, rightVec.z).normalize();
         return rightVecHorizontal.x * this.motionX + rightVecHorizontal.z * this.motionZ;
     }
 
     private static final float STRAFING_THRESHOLD = 30.0f;
 
-    public boolean isStrafing()
-    {
+    public boolean isStrafing() {
         float angle = this.getMovementAngle();
         return (angle >= STRAFING_THRESHOLD && angle <= 180.0F - STRAFING_THRESHOLD)
                 || (angle >= -180.0F + STRAFING_THRESHOLD && angle <= -STRAFING_THRESHOLD);
@@ -235,74 +258,81 @@ public abstract class EntityData<E extends Entity> implements IBendsModel
     /**
      * @return True, if the player is sufficiently underwater.
      */
-    public boolean isUnderwater()
-    {
-        if (!this.entity.isInWater())
-            return false;
+    public boolean isUnderwater() {
+        if (!this.entity.isInWater()) return false;
 
-        int blockX = MathHelper.floor(this.entity.posX);
-        int blockY = MathHelper.floor(this.entity.posY + 2);
-        int blockZ = MathHelper.floor(this.entity.posZ);
-        IBlockState state = Minecraft.getMinecraft().world.getBlockState(new BlockPos(blockX, blockY, blockZ));
-        return state.getBlock() instanceof BlockStaticLiquid;
+        int blockX = Mth.floor(this.entity.getX());
+        int blockY = Mth.floor(this.entity.getY() + 2);
+        int blockZ = Mth.floor(this.entity.getZ());
+        BlockState state =
+                Minecraft.getInstance().level.getBlockState(new BlockPos(blockX, blockY, blockZ));
+        return state.getBlock() instanceof LiquidBlock;
     }
 
-    public double getPrevMotionMagnitude()
-    {
-        return Math.sqrt(this.prevMotionX * this.prevMotionX + this.prevMotionY * this.prevMotionY + this.prevMotionZ * this.prevMotionZ);
+    public double getPrevMotionMagnitude() {
+        return Math.sqrt(
+                this.prevMotionX * this.prevMotionX
+                        + this.prevMotionY * this.prevMotionY
+                        + this.prevMotionZ * this.prevMotionZ);
     }
 
-    public double getMotionMagnitude()
-    {
-        return Math.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+    public double getMotionMagnitude() {
+        return Math.sqrt(
+                this.motionX * this.motionX
+                        + this.motionY * this.motionY
+                        + this.motionZ * this.motionZ);
     }
 
-    public double getInterpolatedMotionMagnitude()
-    {
+    public double getInterpolatedMotionMagnitude() {
         return interpolateMagitude(this.getMotionMagnitude(), this.getPrevMotionMagnitude());
     }
 
-    public double getXZMotionMagnitude()
-    {
+    public double getXZMotionMagnitude() {
         return Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
     }
 
-    public double getPrevXZMotionMagnitude()
-    {
+    public double getPrevXZMotionMagnitude() {
         return Math.sqrt(this.prevMotionX * this.prevMotionX + this.prevMotionZ * this.prevMotionZ);
     }
 
-    public double getInterpolatedXZMotionMagnitude()
-    {
+    public double getInterpolatedXZMotionMagnitude() {
         return interpolateMagitude(this.getXZMotionMagnitude(), this.getPrevXZMotionMagnitude());
     }
 
-    private static double interpolateMagitude(double magnitude, double prevMagnitude)
-    {
+    private static double interpolateMagitude(double magnitude, double prevMagnitude) {
         return prevMagnitude + (magnitude - prevMagnitude) * DataUpdateHandler.partialTicks;
     }
 
-    public void updateClient()
-    {
+    public void updateClient() {
         this.prevMotionX = this.motionX;
         this.prevMotionY = this.motionY;
         this.prevMotionZ = this.motionZ;
 
-        this.motionX = this.entity.posX - this.positionX;
-        this.motionY = this.entity.posY - this.positionY;
-        this.motionZ = this.entity.posZ - this.positionZ;
+        this.motionX = this.entity.getX() - this.positionX;
+        this.motionY = this.entity.getY() - this.positionY;
+        this.motionZ = this.entity.getZ() - this.positionZ;
 
-        this.positionX = this.entity.posX;
-        this.positionY = this.entity.posY;
-        this.positionZ = this.entity.posZ;
+        this.positionX = this.entity.getX();
+        this.positionY = this.entity.getY();
+        this.positionZ = this.entity.getZ();
     }
 
     @Override
-    public Object getPartForName(String name)
-    {
+    public Object getPartForName(String name) {
         return nameToPartMap.get(name);
     }
 
-    public abstract void onTicksRestart();
+    /** Clears the transform channel that only exists for legacy BendsPack prerotation. */
+    public void resetLegacyPreRotations() {
+        Set<goblinbob.mobends.core.client.model.IModelPart> visited =
+                java.util.Collections.newSetFromMap(new IdentityHashMap<>());
+        for (Object value : nameToPartMap.values()) {
+            if (value instanceof goblinbob.mobends.core.client.model.IModelPart part
+                    && visited.add(part)) {
+                part.getPreRotation().orientZero();
+            }
+        }
+    }
 
+    public abstract void onTicksRestart();
 }

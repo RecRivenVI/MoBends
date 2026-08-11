@@ -1,0 +1,113 @@
+name: Stonecutter CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Verify, test, build, and collect Fabric 26.2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Run the Stonecutter target lifecycle
+        run: >-
+          bash gradlew spotlessCheck verifyTargets testAll checkAll buildAll collectArtifacts
+          --configuration-cache
+          --configuration-cache-problems=fail
+          --no-daemon
+          --stacktrace
+          --console=plain
+      - name: Reuse the Gradle configuration cache
+        run: >-
+          bash gradlew spotlessCheck verifyTargets testAll checkAll buildAll collectArtifacts
+          --configuration-cache
+          --configuration-cache-problems=fail
+          --no-daemon
+          --stacktrace
+          --console=plain
+      - name: Upload the Fabric 26.2 production JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobends-fabric-26.2
+          path: build/artifacts/fabric-26.2/mobends-5.1.7+fabric-26.2.jar
+          if-no-files-found: error
+
+  planned-target-gates:
+    name: Reject ${{ matrix.target }} ${{ matrix.task }} before configuration
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: forge-1.20.1
+            task: build
+          - target: forge-1.20.1
+            task: runClient
+          - target: forge-1.20.1
+            task: reobfJar
+          - target: neoforge-1.21.1
+            task: build
+          - target: neoforge-1.21.1
+            task: runClient
+          - target: neoforge-1.21.1
+            task: jar
+          - target: neoforge-26.1.2
+            task: build
+          - target: neoforge-26.1.2
+            task: runClient
+          - target: neoforge-26.1.2
+            task: jar
+          - target: neoforge-26.2
+            task: build
+          - target: neoforge-26.2
+            task: runClient
+          - target: neoforge-26.2
+            task: jar
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Prime only the implemented configuration
+        run: >-
+          bash gradlew help
+          --configuration-cache
+          --configuration-cache-problems=fail
+          --no-daemon
+          --console=plain
+      - name: Verify the planned Target fast-fail gate twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2; do
+            set +e
+            output="$({ bash gradlew ":${{ matrix.target }}:${{ matrix.task }}" \
+              --offline \
+              --configuration-cache \
+              --configuration-cache-problems=fail \
+              --no-daemon \
+              --console=plain; } 2>&1)"
+            status=$?
+            set -e
+            printf '%s\n' "$output"
+            test "$status" -ne 0
+            grep -F "Target '${{ matrix.target }}' is 'planned'; task '${{ matrix.task }}' is unavailable." <<<"$output"
+            if grep -E "^> Task :${{ matrix.target }}:(stonecutterGenerate|compileJava|processResources|jar|reobfJar|remapJar)" <<<"$output"; then
+              echo "A forbidden planned-target task executed."
+              exit 1
+            fi
+          done
+          test ! -e "build/artifacts/${{ matrix.target }}"
+          test ! -e "versions/${{ matrix.target }}/build/libs"

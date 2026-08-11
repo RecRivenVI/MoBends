@@ -1,65 +1,40 @@
 package goblinbob.mobends.core.network;
 
-import net.minecraft.client.Minecraft;
-
 /**
- * These are options that are provided by a server the player's playing on.
- * They are default when playing on single-player.
+ * Server-provided gameplay policy. This traffic stays inside the active Minecraft connection and
+ * never contacts a public remote service.
  */
-public class NetworkConfiguration
-{
+public final class NetworkConfiguration {
+    public static final NetworkConfiguration INSTANCE = new NetworkConfiguration();
 
-	public static NetworkConfiguration instance = new NetworkConfiguration();
+    private boolean modelScalingAllowed;
+    private boolean bendsPacksAllowed = true;
+    private boolean movementLimited = true;
 
-	private final SharedConfig sharedConfig = new SharedConfig();
-	private final SharedProperty<Boolean> modelScalingAllowed;
-    private final SharedProperty<Boolean> bendsPacksAllowed;
-    private final SharedProperty<Boolean> movementLimited;
+    private NetworkConfiguration() {}
 
-    public NetworkConfiguration()
-    {
-        sharedConfig.addProperty(modelScalingAllowed = new SharedBooleanProp(
-                "modelScalingAllowed",
-                false,
-                "Does the server allow scaling of the player model more than the normal size?"));
-        sharedConfig.addProperty(bendsPacksAllowed = new SharedBooleanProp(
-                "bendsPacksAllowed",
-                true,
-                "Does the server allow the use of bends packs?"));
-        sharedConfig.addProperty(movementLimited = new SharedBooleanProp(
-                "movementLimited",
-                true,
-                "Does the server limit excessive bends pack transformation?"));
+    public synchronized void onWorldJoin(boolean singleplayer) {
+        modelScalingAllowed = singleplayer;
+        bendsPacksAllowed = true;
+        movementLimited = !singleplayer;
     }
 
-    /**
-     * Sets up the default permissions before receiving the server's config.
-     */
-	public void onWorldJoin()
-    {
-        this.modelScalingAllowed.setValue(Minecraft.getMinecraft().isSingleplayer());
-        this.bendsPacksAllowed.setValue(true);
-        this.movementLimited.setValue(!Minecraft.getMinecraft().isSingleplayer());
+    public synchronized void applyServerValues(
+            boolean modelScalingAllowed, boolean bendsPacksAllowed, boolean movementLimited) {
+        this.modelScalingAllowed = modelScalingAllowed;
+        this.bendsPacksAllowed = bendsPacksAllowed;
+        this.movementLimited = movementLimited;
     }
 
-    public SharedConfig getSharedConfig()
-    {
-        return sharedConfig;
+    public synchronized boolean isModelScalingAllowed() {
+        return modelScalingAllowed;
     }
 
-	public boolean isModelScalingAllowed()
-	{
-		return modelScalingAllowed.getValue();
-	}
-
-	public boolean areBendsPacksAllowed()
-    {
-	    return bendsPacksAllowed.getValue();
+    public synchronized boolean areBendsPacksAllowed() {
+        return bendsPacksAllowed;
     }
 
-    public boolean isMovementLimited()
-    {
-        return movementLimited.getValue();
+    public synchronized boolean isMovementLimited() {
+        return movementLimited;
     }
-
 }

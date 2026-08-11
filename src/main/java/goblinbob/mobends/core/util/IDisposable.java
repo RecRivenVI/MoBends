@@ -1,8 +1,6 @@
 package goblinbob.mobends.core.util;
 
-public interface IDisposable
-{
+public interface IDisposable {
 
     void dispose();
-
 }

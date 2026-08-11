@@ -24,8 +24,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Context (please complete the following information):**
- - Minecraft version: [e.g. 1.12.2]
- - Mo' Bends version [e.g. 1.0.0, 1.0.0-beta]
+ - Minecraft version: [e.g. x.y.z]
+ - Mo' Bends version [e.g. x.y.z]
  - Other installed mods [e.g. Optifine]
 
 **Additional context**

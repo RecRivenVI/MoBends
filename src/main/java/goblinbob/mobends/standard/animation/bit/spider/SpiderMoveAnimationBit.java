@@ -2,36 +2,31 @@ package goblinbob.mobends.standard.animation.bit.spider;
 
 import goblinbob.mobends.core.client.event.DataUpdateHandler;
 import goblinbob.mobends.standard.data.SpiderData;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
-public class SpiderMoveAnimationBit extends SpiderAnimationBitBase
-{
+public class SpiderMoveAnimationBit extends SpiderAnimationBitBase {
 
-    protected static final String[] ACTIONS = new String[] { "move" };
+    protected static final String[] ACTIONS = new String[] {"move"};
     protected static final float KNEEL_DURATION = 10F;
 
     @Override
-    public String[] getActions(SpiderData data)
-    {
+    public String[] getActions(SpiderData data) {
         return ACTIONS;
     }
 
     @Override
-    public void perform(SpiderData data)
-    {
+    public void perform(SpiderData data) {
         final float ticks = DataUpdateHandler.getTicks();
         final float headYaw = data.headYaw.get();
         final float headPitch = data.headPitch.get();
         final float limbSwing = data.limbSwing.get() * 0.6662F;
 
-        float groundLevel = MathHelper.sin(ticks * 0.6F) * 1.2F;
+        float groundLevel = Mth.sin(ticks * 0.6F) * 1.2F;
         final float touchdown = Math.min(data.getTicksAfterTouchdown() / KNEEL_DURATION, 1.0F);
 
-        if (startTransition < 1.0F)
-            startTransition += DataUpdateHandler.ticksPerFrame * 0.1F;
+        if (startTransition < 1.0F) startTransition += DataUpdateHandler.ticksPerFrame * 0.1F;
 
-        if (touchdown < 1.0F)
-        {
+        if (touchdown < 1.0F) {
             float touchdownInv = 1.0F - touchdown;
             groundLevel += Math.sin((touchdown * 1.2F - 0.2F) * Math.PI * 2) * 3.0F * touchdownInv;
         }
@@ -39,8 +34,8 @@ public class SpiderMoveAnimationBit extends SpiderAnimationBitBase
         data.spiderHead.rotation.orientInstantX(headPitch);
         data.spiderHead.rotation.rotateY(headYaw).finish();
 
-        final float bodyX = MathHelper.sin(ticks * 0.2F) * 0.4F;
-        final float bodyZ = MathHelper.cos(ticks * 0.2F) * 0.4F;
+        final float bodyX = Mth.sin(ticks * 0.2F) * 0.4F;
+        final float bodyZ = Mth.cos(ticks * 0.2F) * 0.4F;
 
         // Back limbs
         animateMovingLimb(data, groundLevel, limbSwing + .0F, 0, 20.0F, 10F, -80, -50);
@@ -63,5 +58,4 @@ public class SpiderMoveAnimationBit extends SpiderAnimationBitBase
         data.renderRotation.orientZero();
         data.centerRotation.orientZero();
     }
-
 }

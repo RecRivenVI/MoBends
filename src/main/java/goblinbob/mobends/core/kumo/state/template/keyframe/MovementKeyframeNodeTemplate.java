@@ -1,7 +1,9 @@
 package goblinbob.mobends.core.kumo.state.template.keyframe;
 
-public class MovementKeyframeNodeTemplate extends KeyframeNodeTemplate
-{
+import goblinbob.mobends.core.kumo.state.template.IKumoValidationContext;
+import goblinbob.mobends.core.kumo.state.template.MalformedKumoTemplateException;
+
+public class MovementKeyframeNodeTemplate extends KeyframeNodeTemplate {
 
     public String animationKey;
 
@@ -9,4 +11,17 @@ public class MovementKeyframeNodeTemplate extends KeyframeNodeTemplate
 
     public float playbackSpeed = 1;
 
+    @Override
+    public void validate(IKumoValidationContext context) throws MalformedKumoTemplateException {
+        super.validate(context);
+
+        if (animationKey == null || animationKey.isBlank()) {
+            throw new MalformedKumoTemplateException(
+                    "A movement keyframe node must specify an animation.");
+        }
+        if (!context.doesAnimationExist(animationKey)) {
+            throw new MalformedKumoTemplateException(
+                    String.format("Trying to use a missing animation: \"%s\".", animationKey));
+        }
+    }
 }

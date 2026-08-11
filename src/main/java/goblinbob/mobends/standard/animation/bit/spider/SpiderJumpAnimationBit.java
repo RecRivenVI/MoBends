@@ -1,24 +1,20 @@
 package goblinbob.mobends.standard.animation.bit.spider;
 
 import goblinbob.mobends.core.animation.bit.AnimationBit;
-import goblinbob.mobends.core.util.GUtil;
+import goblinbob.mobends.lib.util.GUtil;
 import goblinbob.mobends.standard.data.SpiderData;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
-public class SpiderJumpAnimationBit extends AnimationBit<SpiderData>
-{
+public class SpiderJumpAnimationBit extends AnimationBit<SpiderData> {
 
     @Override
-    public String[] getActions(SpiderData entityData)
-    {
-        return new String[] { "jump" };
+    public String[] getActions(SpiderData entityData) {
+        return new String[] {"jump"};
     }
 
     @Override
-    public void perform(SpiderData data)
-    {
-        for (int i = 0; i < data.limbs.length; ++i)
-        {
+    public void perform(SpiderData data) {
+        for (int i = 0; i < data.limbs.length; ++i) {
             boolean odd = i % 2 == 1;
             SpiderData.Limb limb = data.limbs[i];
             float naturalYaw = -((float) i / (data.limbs.length - 1) * 2 - 1);
@@ -26,7 +22,7 @@ public class SpiderJumpAnimationBit extends AnimationBit<SpiderData>
             limb.upperPart.rotation.orientY(naturalYaw / GUtil.PI * 180F);
         }
         float motionY = (float) -data.getInterpolatedMotionY() * 5;
-        motionY = MathHelper.clamp(motionY, -1, 1);
+        motionY = Mth.clamp(motionY, -1, 1);
 
         float legAngle = -20.0F + motionY * 25.0F;
         float smoothness = 1F;
@@ -54,5 +50,4 @@ public class SpiderJumpAnimationBit extends AnimationBit<SpiderData>
         data.centerRotation.orientZero();
         data.renderRotation.orientZero();
     }
-
 }

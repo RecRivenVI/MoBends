@@ -4,45 +4,48 @@ import com.google.gson.*;
 import goblinbob.mobends.core.kumo.KumoSerializer;
 import goblinbob.mobends.core.kumo.state.condition.TriggerConditionRegistry;
 import goblinbob.mobends.core.kumo.state.template.TriggerConditionTemplate;
-
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TriggerConditionTemplateSerializer implements JsonSerializer<TriggerConditionTemplate>, JsonDeserializer<TriggerConditionTemplate>
-{
+public class TriggerConditionTemplateSerializer
+        implements JsonSerializer<TriggerConditionTemplate>,
+                JsonDeserializer<TriggerConditionTemplate> {
 
     private final Map<JsonElement, Type> toDeserialize = new HashMap<>();
 
     @Override
-    public JsonElement serialize(TriggerConditionTemplate src, Type typeOfSrc, JsonSerializationContext context)
-    {
+    public JsonElement serialize(
+            TriggerConditionTemplate src, Type typeOfSrc, JsonSerializationContext context) {
         return KumoSerializer.INSTANCE.gson.toJsonTree(src);
     }
 
     @Override
-    public TriggerConditionTemplate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
-    {
+    public TriggerConditionTemplate deserialize(
+            JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
         final Gson gson = new Gson();
 
-        TriggerConditionTemplate abstractTriggerCondition = gson.fromJson(json, TriggerConditionTemplate.class);
+        TriggerConditionTemplate abstractTriggerCondition =
+                gson.fromJson(json, TriggerConditionTemplate.class);
+        if (abstractTriggerCondition == null) {
+            throw new JsonParseException("A KUMO trigger condition must be an object.");
+        }
         String typeName = abstractTriggerCondition.getType();
 
         if (typeName == null)
-            return null;
+            throw new JsonParseException("A KUMO trigger condition must specify a 'type'.");
 
         Type templateType = TriggerConditionRegistry.instance.getTemplateClass(typeName);
 
         if (templateType == null)
-            return null;
+            throw new JsonParseException("Unknown KUMO trigger condition type: " + typeName);
 
-        if (templateType.equals(typeOfT))
-        {
+        if (templateType.equals(typeOfT)) {
             // If the template type of this condition is the base class.
             return abstractTriggerCondition;
         }
 
         return KumoSerializer.INSTANCE.gson.fromJson(json, templateType);
     }
-
 }

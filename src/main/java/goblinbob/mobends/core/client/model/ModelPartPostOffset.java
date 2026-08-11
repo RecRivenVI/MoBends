@@ -1,52 +1,39 @@
 package goblinbob.mobends.core.client.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.GlStateManager;
-import org.lwjgl.util.vector.Vector3f;
+import com.mojang.blaze3d.vertex.PoseStack;
+import org.joml.Vector3f;
 
 /**
- * This part is used, when accessories are rendered using it's postRender() method. It simply offsets those accessories
- * by a certain transformation.
+ * This part is used, when accessories are rendered using it's postRender() method. It simply
+ * offsets those accessories by a certain transformation. Updated for 1.20.1 to use PoseStack
+ * instead of GlStateManager.
  */
-public class ModelPartPostOffset extends ModelPart
-{
+public class ModelPartPostOffset extends ModelPart {
 
-    /**
-     * The amount to offset whatever is using the postRender method.
-     */
+    /** The amount to offset whatever is using the postRender method. */
     protected Vector3f postOffset = new Vector3f(0.0F, 0.0F, 0.0F);
 
-    public ModelPartPostOffset(ModelBase model, boolean register, int texOffsetX, int texOffsetY)
-    {
-        super(model, register, texOffsetY, texOffsetY);
+    public ModelPartPostOffset(int texOffsetX, int texOffsetY) {
+        super(texOffsetX, texOffsetY);
     }
 
-    public ModelPartPostOffset(ModelBase model, boolean register)
-    {
-        super(model, register);
+    public ModelPartPostOffset() {
+        super();
     }
 
-    public ModelPartPostOffset(ModelBase model, int texOffsetX, int texOffsetY)
-    {
-        super(model, texOffsetX, texOffsetY);
-    }
-
-    public ModelPartPostOffset setPostOffset(float x, float y, float z)
-    {
+    public ModelPartPostOffset setPostOffset(float x, float y, float z) {
         this.postOffset.set(x, y, z);
         return this;
     }
 
     @Override
-    public void propagateTransform(float scale)
-    {
-        super.propagateTransform(scale);
+    public void propagateTransform(PoseStack poseStack, float scale) {
+        super.propagateTransform(poseStack, scale);
     }
 
     @Override
-    public void applyPostTransform(float scale)
-    {
-        GlStateManager.translate(this.postOffset.x * scale, this.postOffset.y * scale, this.postOffset.z * scale);
+    public void applyPostTransform(PoseStack poseStack, float scale) {
+        poseStack.translate(
+                this.postOffset.x * scale, this.postOffset.y * scale, this.postOffset.z * scale);
     }
-
 }

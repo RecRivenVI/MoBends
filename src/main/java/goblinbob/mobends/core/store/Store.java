@@ -1,7 +1,6 @@
 package goblinbob.mobends.core.store;
 
-public class Store<T>
-{
+public class Store<T> {
 
     protected T state;
 
@@ -16,5 +15,4 @@ public class Store<T>
     public <P> void commit(IMutation<T, P> mutation, P payload) {
         this.state = mutation.mutate(this.state, payload);
     }
-
 }

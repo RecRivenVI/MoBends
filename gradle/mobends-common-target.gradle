@@ -1,0 +1,165 @@
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.testing.Test
+import org.gradle.jvm.tasks.Jar
+
+apply from: rootProject.file('gradle/stonecutter-target-conventions.gradle.kts')
+
+def targetName = sc.current.project
+def loader = targetName.substring(0, targetName.indexOf('-'))
+def minecraftVersion = sc.current.version
+def legacyMinecraft = minecraftVersion == '1.21.1' || minecraftVersion == '1.20.1'
+def familySource = legacyMinecraft ? 'minecraft-1x' : 'minecraft-26x'
+def modId = project.property('mod.id')
+def modGroupId = project.property('mod.group')
+def modVersion = project.property('mod.version')
+def modName = project.property('mod.name')
+def modLicense = project.property('mod.license')
+def modAuthors = project.property('mod.authors')
+def modDescription = project.property('mod.description')
+def javaVersion = project.property('target.java') as int
+def minecraftVersionRange = project.property('target.minecraft.compatibility')
+def loaderVersionRange = project.property('target.loader.compatibility')
+def modIconProperty = minecraftVersion == '26.2' ? 'iconFile' : 'logoFile'
+
+group = modGroupId
+version = "${modVersion}+${targetName}"
+
+base {
+    archivesName = 'mobends'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
+    withSourcesJar()
+}
+
+sourceSets {
+    main {
+        java.srcDir(rootProject.file("src/${familySource}/java"))
+        if (loader == 'neoforge') {
+            java.srcDir(rootProject.file('src/neoforge-common/java'))
+            resources.srcDir(rootProject.file('src/neoforge-common/resources'))
+        }
+        if (legacyMinecraft) {
+            def legacyPlatform = loader == 'neoforge' ? 'neoforge-1x' : loader
+            java.srcDir(rootProject.file("src/${legacyPlatform}/java"))
+            resources.srcDir(rootProject.file("src/${legacyPlatform}/resources"))
+        } else {
+            def modernPlatform = loader == 'neoforge' ? 'neoforge-26x' : loader
+            java.srcDir(rootProject.file("src/${modernPlatform}/java"))
+            resources.srcDir(rootProject.file("src/${modernPlatform}/resources"))
+            if (loader == 'neoforge') {
+                resources.srcDir(rootProject.file('src/neoforge-26x/templates'))
+            }
+        }
+    }
+    test {
+        if (legacyMinecraft) {
+            java.srcDir(rootProject.file('src/minecraft-1x-test/java'))
+            java.exclude(
+                'goblinbob/mobends/core/bender/EntityBenderRegistryTest.java',
+                'goblinbob/mobends/core/util/GlHelperTest.java',
+                'goblinbob/mobends/standard/main/ModConfigTest.java',
+                'goblinbob/mobends/standard/mutators/CreatureMutatorModelTest.java',
+                'goblinbob/mobends/standard/client/renderer/entity/mutated/PlayerRendererCompatibilityTest.java',
+                'goblinbob/mobends/standard/client/model/armor/tier1/Tier1RendererTest.java',
+                'goblinbob/mobends/standard/animation/controller/WolfControllerCompatibilityTest.java'
+            )
+        } else {
+            java.srcDir(rootProject.file('src/minecraft-26x-test/java'))
+        }
+        compileClasspath += sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.runtimeClasspath
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    testImplementation platform("org.junit:junit-bom:${project.property('deps.junit')}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+processResources {
+    includeEmptyDirs = false
+    def replacements = [
+        mod_id: modId,
+        mod_name: modName,
+        mod_license: modLicense,
+        mod_version: project.version,
+        mod_authors: modAuthors,
+        mod_description: modDescription,
+        mod_icon_property: modIconProperty,
+        minecraft_version: minecraftVersion,
+        minecraft_version_range: minecraftVersionRange,
+        loader_version_range: loaderVersionRange,
+        java_version: javaVersion
+    ]
+    inputs.properties(replacements)
+    filesMatching([
+        'fabric.mod.json',
+        'META-INF/neoforge.mods.toml',
+        'META-INF/mods.toml',
+        'mobends-fabric.mixins.json',
+        'mobends-neoforge.mixins.json',
+        'mobends-forge.mixins.json',
+        'mobends_version.properties'
+    ]) {
+        expand(replacements)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set(javaVersion)
+    options.compilerArgs.addAll(['-Xmaxerrs', '5000'])
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    systemProperty 'mobends.minecraftVersion', minecraftVersion
+    systemProperty 'mobends.targetId', targetName
+    systemProperty 'mobends.expectedVersion', project.version.toString()
+}
+
+tasks.named('jar', Jar) {
+    from(rootProject.file('LICENSE')) {
+        rename('LICENSE', "LICENSE_${modId}")
+    }
+    if (loader == 'forge') {
+        manifest.attributes['MixinConfigs'] = 'mobends-forge.mixins.json'
+    }
+}
+
+def productionArtifactName = loader == 'forge' ? 'reobfJar' : 'jar'
+def productionArtifacts = tasks.matching { it.name == productionArtifactName }
+
+tasks.register('collectArtifact', Sync) {
+    group = 'build'
+    description = "Collects the production artifact for ${targetName}."
+    dependsOn('build', productionArtifactName)
+    from(productionArtifacts)
+    into(rootProject.layout.buildDirectory.dir("artifacts/${targetName}"))
+}
+
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+stonecutter {
+    constants['fabric'] = loader == 'fabric'
+    constants['neoforge'] = loader == 'neoforge'
+    constants['forge'] = loader == 'forge'
+    constants['forge_like'] = loader == 'forge' || loader == 'neoforge'
+}

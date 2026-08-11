@@ -3,22 +3,19 @@ package goblinbob.mobends.standard.animation.bit.player;
 import goblinbob.mobends.core.animation.bit.AnimationBit;
 import goblinbob.mobends.core.client.event.DataUpdateHandler;
 import goblinbob.mobends.standard.data.PlayerData;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
-public class SleepingAnimationBit extends AnimationBit<PlayerData>
-{
+public class SleepingAnimationBit extends AnimationBit<PlayerData> {
 
-    private static final String[] ACTIONS = new String[] { "sleeping" };
+    private static final String[] ACTIONS = new String[] {"sleeping"};
 
     @Override
-    public String[] getActions(PlayerData entityData)
-    {
+    public String[] getActions(PlayerData entityData) {
         return ACTIONS;
     }
 
     @Override
-    public void perform(PlayerData data)
-    {
+    public void perform(PlayerData data) {
         data.localOffset.slideToZero(0.3F);
         data.globalOffset.slideToZero(0.3F);
         data.renderRotation.setSmoothness(.3F).orientZero();
@@ -39,11 +36,8 @@ public class SleepingAnimationBit extends AnimationBit<PlayerData>
 
         final float PI = (float) Math.PI;
         float phase = DataUpdateHandler.getTicks() / 10;
-        data.head.rotation.setSmoothness(1.0F).orientX(((MathHelper.cos(phase) - 1) / 2) * -3);
-        data.rightArm.rotation.setSmoothness(0.4F).orientX(0.0F)
-                .rotateZ(2.5F);
-        data.leftArm.rotation.setSmoothness(0.4F).orientX(0.0F)
-                .rotateZ(-2.5F);
+        data.head.rotation.setSmoothness(1.0F).orientX(((Mth.cos(phase) - 1) / 2) * -3);
+        data.rightArm.rotation.setSmoothness(0.4F).orientX(0.0F).rotateZ(2.5F);
+        data.leftArm.rotation.setSmoothness(0.4F).orientX(0.0F).rotateZ(-2.5F);
     }
-
 }

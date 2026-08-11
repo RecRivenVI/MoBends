@@ -1,0 +1,12 @@
+package goblinbob.mobends.standard.client.renderer.entity.mutated;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+class PlayerRendererCompatibilityTest {
+    @Test
+    void groundedCrouchCancelsOnlyTheModernVanillaRenderOffset() {
+        assertEquals(2.0F, PlayerRenderer.MODERN_GROUNDED_CROUCH_COMPENSATION);
+    }
+}

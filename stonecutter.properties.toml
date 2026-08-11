@@ -1,0 +1,55 @@
+mod.id = "mobends"
+mod.name = "Mo' Bends"
+mod.group = "com.recrivenvi.mobends"
+mod.version = "5.1.7"
+mod.license = "MIT"
+mod.authors = "RecRivenVI"
+mod.description = "Mo' Bends adds expressive and fluid animations to Minecraft players and creatures."
+mod.homepage = "https://github.com/RecRivenVI/MoBends"
+mod.sources = "https://github.com/RecRivenVI/MoBends"
+mod.issues = "https://github.com/RecRivenVI/MoBends/issues"
+
+deps.junit = "6.0.3"
+target.status = "planned"
+target.client = true
+target.server = true
+
+["1.20.1"]
+target.java = 17
+target.minecraft.compatibility = "[1.20.1,1.21)"
+
+[forge."1.20.1"]
+deps.forge.loader = "1.20.1-47.4.22"
+target.loader.compatibility = "[47,)"
+
+["1.21.1"]
+target.java = 21
+target.minecraft.compatibility = "[1.21.1,1.22)"
+
+[neoforge."1.21.1"]
+deps.neoforge.loader = "21.1.248"
+target.loader.compatibility = "[4,)"
+
+["26.1.2"]
+target.java = 25
+target.minecraft.compatibility = "[26.1.2,26.2)"
+
+[neoforge."26.1.2"]
+deps.neoforge.loader = "26.1.2.94"
+target.loader.compatibility = "[26.1.2,)"
+
+["26.2"]
+target.java = 25
+
+[fabric."26.2"]
+deps.fabric.loader = "0.19.3"
+deps.fabric.api = "0.156.0+26.2"
+deps.modmenu = "20.0.1"
+target.status = "implemented"
+target.minecraft.compatibility = "~26.2"
+target.loader.compatibility = ">=0.19.3"
+
+[neoforge."26.2"]
+deps.neoforge.loader = "26.2.0.53-beta"
+target.minecraft.compatibility = "[26.2,26.3)"
+target.loader.compatibility = "[26.2,)"

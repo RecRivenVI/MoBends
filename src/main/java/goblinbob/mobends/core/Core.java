@@ -1,95 +1,54 @@
 package goblinbob.mobends.core;
 
-import goblinbob.mobends.core.configuration.CoreConfig;
-import goblinbob.mobends.core.module.IModule;
-import goblinbob.mobends.core.network.msg.MessageConfigRequest;
-import goblinbob.mobends.core.network.msg.MessageConfigResponse;
-import goblinbob.mobends.standard.main.ModStatics;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
+/**
+ * Core class providing base functionality for MoBends. Platform-specific implementations extend
+ * this class.
+ */
+public class Core {
+    protected static Core instance;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.logging.Logger;
-
-public abstract class Core<T extends CoreConfig>
-{
-    private static Core INSTANCE;
-    public static final Logger LOG = Logger.getLogger("mobends-core");
-
-    private SimpleNetworkWrapper networkWrapper;
-    private static final int MESSAGE_CONFIG_REQUEST = 0;
-    private static final int MESSAGE_CONFIG_RESPONSE = 1;
-
-    private Collection<IModule> modules = new ArrayList<>();
-
-    public abstract T getConfiguration();
-
-    public void preInit(FMLPreInitializationEvent event)
-    {
-        networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ModStatics.MODID);
-        networkWrapper.registerMessage(MessageConfigRequest.Handler.class, MessageConfigRequest.class, MESSAGE_CONFIG_REQUEST, Side.SERVER);
-        networkWrapper.registerMessage(MessageConfigResponse.Handler.class, MessageConfigResponse.class, MESSAGE_CONFIG_RESPONSE, Side.CLIENT);
-
-        for (IModule module : modules)
-        {
-            module.preInit(event);
-        }
+    /**
+     * Gets the singleton instance.
+     *
+     * @return The Core instance
+     */
+    public static Core getInstance() {
+        return instance;
     }
 
-    public void init(FMLInitializationEvent event)
-    {
-
+    /**
+     * Creates the core as a client-side implementation. Platform implementations should override
+     * this in their Core subclass.
+     */
+    public static void createAsClient() {
+        // Platform implementation creates the appropriate CoreClient subclass
     }
 
-    public void postInit(FMLPostInitializationEvent event)
-    {
-
+    /**
+     * Creates the core as a server-side implementation. Platform implementations should override
+     * this in their Core subclass.
+     */
+    public static void createAsServer() {
+        // Platform implementation creates the appropriate CoreServer subclass
     }
 
-    public void registerModule(IModule module)
-    {
-        this.modules.add(module);
+    /** Called during client setup. */
+    public void onClientSetup() {
+        // Override in platform-specific implementation
     }
 
-    public void refreshModules()
-    {
-        for (IModule module : modules)
-        {
-            module.onRefresh();
-        }
+    /** Called during server setup. */
+    public void onServerSetup() {
+        // Override in platform-specific implementation
     }
 
-    // Static methods
-
-    public static Core getInstance()
-    {
-        return INSTANCE;
+    /** Applies configuration to entity benders. */
+    public void applyConfigurationToEntityBenders() {
+        // Override in platform-specific implementation
     }
 
-    public static void createAsClient()
-    {
-        if (INSTANCE == null)
-            INSTANCE = new CoreClient();
-    }
-
-    public static void createAsServer()
-    {
-        if (INSTANCE == null)
-            INSTANCE = new CoreServer();
-    }
-
-    public static SimpleNetworkWrapper getNetworkWrapper()
-    {
-        return INSTANCE.networkWrapper;
-    }
-
-    public static void saveConfiguration()
-    {
-        INSTANCE.getConfiguration().save();
+    /** Saves the mod configuration. Platform implementations should override this behavior. */
+    public static void saveConfiguration() {
+        // No-op stub - platform implementations will override
     }
 }

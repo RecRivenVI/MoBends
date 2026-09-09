@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "node": "26.1.2-neoforge",
+  "profile": "S2",
+  "role": "PRIMARY",
+  "playerName": "RecRivenVI",
+  "resolution": "2560x1440",
+  "gameDirectory": "run/instances/26.1.2-neoforge/client/primary/s2",
+  "modsDirectory": "run/instances/26.1.2-neoforge/client/primary/s2/mods",
+  "requiredJvmArgs": [],
+  "requiredTestMods": [
+    "CustomSkinLoader:15.0.1-Universal"
+  ],
+  "compatibilityFixture": null
+}

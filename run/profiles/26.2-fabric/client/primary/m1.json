@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "node": "26.2-fabric",
+  "profile": "M1",
+  "role": "PRIMARY",
+  "playerName": "RecRivenVI",
+  "resolution": "2560x1440",
+  "gameDirectory": "run/instances/26.2-fabric/client/primary/m1",
+  "modsDirectory": "run/instances/26.2-fabric/client/primary/m1/mods",
+  "requiredJvmArgs": [],
+  "requiredTestMods": [
+    "CustomSkinLoader:15.0.1-Universal",
+    "ModMenu:20.0.1"
+  ],
+  "compatibilityFixture": null
+}

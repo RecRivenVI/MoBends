@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "node": "26.1.2-neoforge",
+  "profile": "M2",
+  "role": "SECONDARY",
+  "playerName": "CNN_MOYAN",
+  "resolution": "2560x1440",
+  "gameDirectory": "run/instances/26.1.2-neoforge/client/secondary/m2",
+  "modsDirectory": "run/instances/26.1.2-neoforge/client/secondary/m2/mods",
+  "requiredJvmArgs": [],
+  "requiredTestMods": [
+    "CustomSkinLoader:15.0.1-Universal"
+  ],
+  "compatibilityFixture": null
+}

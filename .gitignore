@@ -23,7 +23,8 @@ replay_pid*
 .settings/
 
 # Minecraft development runtime data
-/run/
+/run/instances/
+/run/cache/
 /run-*/
 **/logs/
 /net/

@@ -1,92 +1,39 @@
 # Mo' Bends
+[![CurseForge Downloads](http://cf.way2muchnoise.eu/231347.svg)](https://www.curseforge.com/minecraft/mc-mods/mo-bends) [![Mod Versions](http://cf.way2muchnoise.eu/versions/231347.svg)](https://www.curseforge.com/minecraft/mc-mods/mo-bends) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dc7fa82e8d904f65b33b948ed093c21f)](https://app.codacy.com/gh/mobends/MoBends?utm_source=github.com&utm_medium=referral&utm_content=mobends/MoBends&utm_campaign=Badge_Grade_Dashboard)
 
-[![Stonecutter CI](https://github.com/RecRivenVI/MoBends/actions/workflows/stonecutter.yml/badge.svg)](https://github.com/RecRivenVI/MoBends/actions/workflows/stonecutter.yml)
 
-Mo' Bends 是由 RecRivenVI 独立维护的多版本 Minecraft Java 模组。它为玩家和多种生物提供更
-自然的关节、姿态、动作过渡、装备渲染与攻击轨迹，并通过 Stonecutter 保存五个
-Minecraft/Loader 目标的结构与兼容边界。当前只有 Fabric 26.2 进入实现、构建和发布生命周期。
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/mobends/MoBends.svg?style=for-the-badge)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/mobends/MoBends.svg?style=for-the-badge)](https://github.com/mobends/MoBends/pulls)
+[![GitHub issues](https://img.shields.io/github/issues-raw/mobends/MoBends.svg?style=for-the-badge)](https://github.com/mobends/MoBends/issues)
 
-## 支持矩阵
+A Minecraft mod that adds more realistic looking animations to the inhabitants of your blocky world.
 
-| Target | Minecraft | Loader | 状态 |
-| --- | --- | --- | --- |
-| `forge-1.20.1` | 1.20.1 | Forge | Planned |
-| `neoforge-1.21.1` | 1.21.1 | NeoForge | Planned |
-| `neoforge-26.1.2` | 26.1.2 | NeoForge | Planned |
-| `fabric-26.2` | 26.2 | Fabric | Implemented |
-| `neoforge-26.2` | 26.2 | NeoForge | Planned |
+## Discord
+The development of version **1.0.0** is in progress right now! If you'd like to be a part of it, see the progress, or just hang out, join our Discord server!
 
-`versions/current` 指向默认活动目标 `fabric-26.2`。Planned 表示现有源码、适配层、测试资料和
-运行实例被安全保留以供未来重新激活，不表示当前可构建、可运行、可发布或已通过验收。
+[![Discord](https://img.shields.io/discord/386940930739011584.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/JqgWRgdkvx)
 
-## 主要功能
+Say you came from GitHub if you decide to come by! Hope to see you there
 
-- 玩家、僵尸、骷髅、僵尸猪灵、蜘蛛、鱿鱼和狼的弯曲模型与动画；
-- 步行、疾跑、潜行、跳跃、游泳、攀爬、骑乘、飞行、睡眠与鞘翅姿态；
-- 食物、弓、盾、工具、拳击、剑连段及现代物品动作；
-- 分段盔甲、手持物、头戴物、披风、鞘翅、剑刃拖尾和箭矢拖尾；
-- 通过 Mod Menu 或加载器 Mods 页面打开的原版风格配置页；
-- 本地 BendsPack 扫描、排序、自动刷新、KUMO 条件和 Addon API；
-- 可选的服务端动画策略同步，未安装 Mo' Bends 的客户端仍可加入。
+## Local Development Setup
+Install a Java Development Kit (JDK) appropriate for the Minecraft version you are developing for. For Minecraft 1.12.2, use JDK 8.
+I personally use the [Eclipse Temurin JDK](https://adoptium.net/temurin/releases?version=8&os=any&arch=any).
 
-## 开发环境
+There are a few paper-cuts in developing mods (especially for older versions of Minecraft), but a sure-fire way to avoid
+them is to build and run the project using IntelliJ IDEA. It seems to build everything from source, as opposed to the
+`./gradlew runClient` and `./gradlew runServer` scripts, which fail at bootup.
 
-- Windows；
-- JDK 25 用于 Gradle；
-- Gradle Wrapper 9.7.0；
-- Stonecutter 0.10；
-- 当前 implemented 的 Fabric 26.2 依赖由 Gradle 自动解析；planned 节点不会解析对应
-  Minecraft/Loader 依赖。
+### Troubleshooting
+- IntelliJ freaks out and can't find symbols in the project, but compiles fine.
+    - `File > Invalidate Caches/Restart` works like a charm <3
+- Crashing on a NullPointerException inside FML.
+    - Click "Download Sources" in the Gradle sidebar
 
-详情见 [开发入门](docs/development/getting-started.md)。
+## Creating addons
+Addons are a way to extend the functionality of Mo' Bends, e.g. adding support for new mobs.
 
-## 构建、测试和运行
+There's an example addon that I set up a while back, but the sources for CustomNPCs are
+no longer available, which makes it impossible to use. I'm looking for a replacement soon.
 
-```powershell
-.\gradlew.bat spotlessApply
-.\gradlew.bat spotlessCheck verifyTargets testAll checkAll buildAll collectArtifacts `
-  --configuration-cache --configuration-cache-problems=fail `
-  --no-daemon --stacktrace --console=plain
-.\gradlew.bat :fabric-26.2:runClient -Pruntime.world=<save-directory> -Pruntime.username=<profile>
-```
-
-当前唯一生产 JAR 位于 `build/artifacts/fabric-26.2/`，文件名为
-`mobends-<mod-version>+fabric-26.2.jar`。所有声明目标的运行实例仍保留在
-`run/<target>/<side>/`，但只能通过 implemented Target 的统一 Gradle 任务启动。`run/` 是受
-Git 忽略的本地用户数据；干净 checkout 不要求预先存在任何实体运行目录。
-
-## 源码结构
-
-- `src/main`、`src/test`：五目标共享内容；
-- `src/minecraft-1x`、`src/minecraft-26x`：Minecraft 版本家族实现；
-- `src/fabric`、`src/forge`、`src/neoforge-common`、`src/neoforge-1x`、`src/neoforge-26x`：加载器实现；
-- `versions/<target>/src`：精确目标覆盖；
-- `stonecutter.properties.toml`：`mod.*`、`deps.*`、`target.*` 中央属性；
-- `docs/`：架构、开发、测试和上游行为参考。
-
-完整说明见 [项目布局](docs/architecture/project-layout.md)。
-
-## Addon API 边界
-
-公开 Addon API 继续保留 `goblinbob.mobends` 包名以及注册、生命周期、Bender、动画和 KUMO
-条件能力。旧 1.12.2 Addon JAR 不承诺跨 Minecraft 版本二进制兼容，需要针对具体 Target 重新
-编译。详情见 [兼容性策略](docs/development/compatibility-policy.md)。
-
-## 当前已知限制
-
-- 远程包数据库、下载、支持者身份与外部动画编辑器不属于当前功能；
-- 没有本地可见披风来源时，披风视觉验收无法完成；
-- 第三方自定义盔甲和头戴层需要按具体模组提供兼容样本；
-- planned Target 尚不构成当前支持声明；其历史 GUI、渲染和运行结果不能作为当前 PASS 状态。
-
-持续验证范围见 [验收矩阵](docs/testing/acceptance-matrix.md) 和
-[运行时验证](docs/testing/runtime-validation.md)。
-
-## Credits
-
-Mo' Bends 最初由 Iwo Plaza（GoblinBob）创作。本项目保留原始许可、版权、公开 mod ID、资源
-命名空间、Addon API 包名和兼容标识；完整归属见 [CREDITS.md](CREDITS.md)。
-
-## License
-
-本项目依照仓库中的 [MIT License](LICENSE) 分发。已有源码文件中的原始版权声明继续有效。
+[CustomNPCs Support Addon](https://github.com/mobends/mobends-addon-customnpcs)

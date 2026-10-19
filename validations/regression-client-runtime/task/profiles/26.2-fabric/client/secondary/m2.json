@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "node": "26.2-fabric",
+  "profile": "M2",
+  "role": "SECONDARY",
+  "playerName": "CNN_MOYAN",
+  "resolution": "2560x1440",
+  "gameDirectory": "validations/regression-client-runtime/instance/26.2-fabric/client/secondary/m2",
+  "modsDirectory": "validations/regression-client-runtime/instance/26.2-fabric/client/secondary/m2/mods",
+  "requiredJvmArgs": [],
+  "requiredTestMods": [
+    "CustomSkinLoader:15.0.1-Universal",
+    "ModMenu:20.0.1"
+  ],
+  "compatibilityFixture": null
+}

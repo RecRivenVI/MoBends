@@ -1,0 +1,28 @@
+spotless {
+    lineEndings = 'UNIX'
+    encoding = 'UTF-8'
+    java {
+        target fileTree('versions') { include '*/src/**/*.java' }
+        googleJavaFormat().aosp()
+        formatAnnotations()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    kotlinGradle {
+        target 'settings.gradle.kts', 'build.gradle.kts', 'versions/*/build.gradle.kts'
+        ktlint()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format('structuredText') {
+        target 'gradle.properties', 'instance.properties', 'versions/*/target.properties', 'versions/*/src/**/*.json', 'versions/*/src/**/*.toml', 'versions/*/src/**/*.properties', 'validations/*/task/profiles/**/*.json'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format('repositoryFiles') {
+        target '.editorconfig', '.gitattributes', '.gitignore'
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}

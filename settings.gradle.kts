@@ -1,3 +1,5 @@
+import java.util.Properties
+
 pluginManagement {
     repositories {
         mavenCentral()
@@ -11,8 +13,6 @@ pluginManagement {
 }
 
 plugins {
-    id("dev.kikugie.stonecutter") version "0.9.7"
-    id("dev.kikugie.loom-back-compat") version "0.4.2"
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
@@ -20,28 +20,19 @@ check(JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_25)) {
     "The Stonecutter build must run on JDK 25 or newer; current runtime is ${JavaVersion.current()}."
 }
 
-stonecutter {
-    create(rootProject) {
-        fun match(
-            project: String,
-            vararg loaders: String,
-            version: String = project,
-        ) {
-            for (loader in loaders) {
-                version("$project-$loader", version).buildscript("build.$loader.gradle.kts")
-            }
-        }
-
-        match("1.20.1", "forge")
-        match("1.21.1", "neoforge")
-        match("26.1.2", "neoforge")
-        match("26.2", "fabric", "neoforge")
-        vcsVersion = "26.2-fabric"
-    }
-}
-
 rootProject.name = "MoBends"
 
-includeBuild("gradle/formatting") {
-    name = "mobends-formatting"
+include(":version")
+project(":version").projectDir = file("versions")
+val targets = listOf("1.20.1-forge", "1.21.1-neoforge", "26.1.2-neoforge", "26.2-fabric", "26.2-neoforge")
+for (target in targets) {
+    include(":version:$target")
+    project(":version:$target").projectDir = file("versions/$target")
+}
+gradle.beforeProject {
+    if (path.startsWith(":version:")) {
+        val facts = Properties()
+        file("target.properties").inputStream().use(facts::load)
+        facts.forEach { key, value -> extensions.extraProperties.set(key.toString(), value.toString()) }
+    }
 }

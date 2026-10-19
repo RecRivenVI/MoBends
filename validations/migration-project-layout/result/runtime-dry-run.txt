@@ -1,0 +1,99 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+Calculating task graph as no cached configuration is available for tasks: :version:1.20.1-forge:runClient :version:1.20.1-forge:runClientMultiplayer :version:1.21.1-neoforge:runClient :version:1.21.1-neoforge:runClientMultiplayer :version:26.1.2-neoforge:runClient :version:26.1.2-neoforge:runClientMultiplayer :version:26.2-fabric:runClient :version:26.2-fabric:runClientMultiplayer :version:26.2-neoforge:runClient :version:26.2-neoforge:runClientMultiplayer
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :buildSrc:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :buildSrc:compilePluginsBlocks UP-TO-DATE
+> Task :buildSrc:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :buildSrc:generateScriptPluginAdapters UP-TO-DATE
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources UP-TO-DATE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+> Configure project :version:26.1.2-neoforge
+Parsed unknown MC version 26.1.2 from NeoForge version 26.1.2.97. Using capabilities of latest known Minecraft version 26.1-snapshot-2 with an updated Minecraft version.
+
+> Configure project :version:26.2-fabric
+Fabric Loom: 1.17.19
+
+> Configure project :version:26.2-neoforge
+Parsed unknown MC version 26.2 from NeoForge version 26.2.0.66. Using capabilities of latest known Minecraft version 26.1-snapshot-2 with an updated Minecraft version.
+:version:1.20.1-forge:createMinecraftArtifacts SKIPPED
+:version:1.20.1-forge:compileJava SKIPPED
+:version:1.20.1-forge:processResources SKIPPED
+:version:1.20.1-forge:classes SKIPPED
+:version:1.20.1-forge:downloadAssets SKIPPED
+:version:1.20.1-forge:writeClientLegacyClasspath SKIPPED
+:version:1.20.1-forge:prepareClientRun SKIPPED
+:version:1.20.1-forge:stagePrimaryRuntimeProfile SKIPPED
+:version:1.20.1-forge:verifyPrimaryRuntimeProfile SKIPPED
+:version:1.20.1-forge:runClient SKIPPED
+:version:1.20.1-forge:writeClientMultiplayerLegacyClasspath SKIPPED
+:version:1.20.1-forge:prepareClientMultiplayerRun SKIPPED
+:version:1.20.1-forge:stageMultiplayerRuntimeProfile SKIPPED
+:version:1.20.1-forge:verifyMultiplayerRuntimeProfile SKIPPED
+:version:1.20.1-forge:runClientMultiplayer SKIPPED
+:version:1.21.1-neoforge:createMinecraftArtifacts SKIPPED
+:version:1.21.1-neoforge:compileJava SKIPPED
+:version:1.21.1-neoforge:processResources SKIPPED
+:version:1.21.1-neoforge:classes SKIPPED
+:version:1.21.1-neoforge:downloadAssets SKIPPED
+:version:1.21.1-neoforge:writeClientLegacyClasspath SKIPPED
+:version:1.21.1-neoforge:prepareClientRun SKIPPED
+:version:1.21.1-neoforge:stagePrimaryRuntimeProfile SKIPPED
+:version:1.21.1-neoforge:verifyPrimaryRuntimeProfile SKIPPED
+:version:1.21.1-neoforge:runClient SKIPPED
+:version:1.21.1-neoforge:writeClientMultiplayerLegacyClasspath SKIPPED
+:version:1.21.1-neoforge:prepareClientMultiplayerRun SKIPPED
+:version:1.21.1-neoforge:stageMultiplayerRuntimeProfile SKIPPED
+:version:1.21.1-neoforge:verifyMultiplayerRuntimeProfile SKIPPED
+:version:1.21.1-neoforge:runClientMultiplayer SKIPPED
+:version:26.1.2-neoforge:createMinecraftArtifacts SKIPPED
+:version:26.1.2-neoforge:compileJava SKIPPED
+:version:26.1.2-neoforge:processResources SKIPPED
+:version:26.1.2-neoforge:classes SKIPPED
+:version:26.1.2-neoforge:downloadAssets SKIPPED
+:version:26.1.2-neoforge:prepareClientRun SKIPPED
+:version:26.1.2-neoforge:stagePrimaryRuntimeProfile SKIPPED
+:version:26.1.2-neoforge:verifyPrimaryRuntimeProfile SKIPPED
+:version:26.1.2-neoforge:runClient SKIPPED
+:version:26.1.2-neoforge:prepareClientMultiplayerRun SKIPPED
+:version:26.1.2-neoforge:stageMultiplayerRuntimeProfile SKIPPED
+:version:26.1.2-neoforge:verifyMultiplayerRuntimeProfile SKIPPED
+:version:26.1.2-neoforge:runClientMultiplayer SKIPPED
+:version:26.2-fabric:compileJava SKIPPED
+:version:26.2-fabric:processResources SKIPPED
+:version:26.2-fabric:classes SKIPPED
+:version:26.2-fabric:generateLog4jConfig SKIPPED
+:version:26.2-fabric:generateDLIConfig SKIPPED
+:version:26.2-fabric:configureLaunch SKIPPED
+:version:26.2-fabric:downloadAssets SKIPPED
+:version:26.2-fabric:configureClientLaunch SKIPPED
+:version:26.2-fabric:stagePrimaryRuntimeProfile SKIPPED
+:version:26.2-fabric:verifyPrimaryRuntimeProfile SKIPPED
+:version:26.2-fabric:runClient SKIPPED
+:version:26.2-fabric:stageMultiplayerRuntimeProfile SKIPPED
+:version:26.2-fabric:verifyMultiplayerRuntimeProfile SKIPPED
+:version:26.2-fabric:runClientMultiplayer SKIPPED
+:version:26.2-neoforge:createMinecraftArtifacts SKIPPED
+:version:26.2-neoforge:compileJava SKIPPED
+:version:26.2-neoforge:processResources SKIPPED
+:version:26.2-neoforge:classes SKIPPED
+:version:26.2-neoforge:downloadAssets SKIPPED
+:version:26.2-neoforge:prepareClientRun SKIPPED
+:version:26.2-neoforge:stagePrimaryRuntimeProfile SKIPPED
+:version:26.2-neoforge:verifyPrimaryRuntimeProfile SKIPPED
+:version:26.2-neoforge:runClient SKIPPED
+:version:26.2-neoforge:prepareClientMultiplayerRun SKIPPED
+:version:26.2-neoforge:stageMultiplayerRuntimeProfile SKIPPED
+:version:26.2-neoforge:verifyMultiplayerRuntimeProfile SKIPPED
+:version:26.2-neoforge:runClientMultiplayer SKIPPED
+
+BUILD SUCCESSFUL in 13s
+9 actionable tasks: 9 up-to-date
+Configuration cache entry stored.

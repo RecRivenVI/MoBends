@@ -1,0 +1,133 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+Calculating task graph as configuration cache cannot be reused because cached version information for org.apache.logging.log4j:log4j-api:2.11.+ has expired.
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :buildSrc:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :buildSrc:compilePluginsBlocks UP-TO-DATE
+> Task :buildSrc:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :buildSrc:generateScriptPluginAdapters UP-TO-DATE
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources UP-TO-DATE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+> Configure project :version:26.1.2-neoforge
+Parsed unknown MC version 26.1.2 from NeoForge version 26.1.2.97. Using capabilities of latest known Minecraft version 26.1-snapshot-2 with an updated Minecraft version.
+
+> Configure project :version:26.2-fabric
+Fabric Loom: 1.17.19
+
+> Configure project :version:26.2-neoforge
+Parsed unknown MC version 26.2 from NeoForge version 26.2.0.66. Using capabilities of latest known Minecraft version 26.1-snapshot-2 with an updated Minecraft version.
+
+> Task :version:26.2-fabric:validateAccessWidener NO-SOURCE
+> Task :version:26.2-fabric:processIncludeJars UP-TO-DATE
+> Task :version:26.2-neoforge:processTestResources NO-SOURCE
+> Task :version:26.2-fabric:processTestResources NO-SOURCE
+> Task :version:26.1.2-neoforge:processTestResources NO-SOURCE
+> Task :version:1.21.1-neoforge:processTestResources NO-SOURCE
+> Task :version:1.20.1-forge:jarJar NO-SOURCE
+> Task :version:26.1.2-neoforge:jarJar NO-SOURCE
+> Task :version:1.21.1-neoforge:jarJar NO-SOURCE
+> Task :version:26.2-neoforge:jarJar NO-SOURCE
+> Task :version:1.20.1-forge:processTestResources NO-SOURCE
+> Task :version:26.2-neoforge:processResources UP-TO-DATE
+> Task :version:1.20.1-forge:processResources UP-TO-DATE
+> Task :version:26.2-fabric:processResources UP-TO-DATE
+> Task :version:1.21.1-neoforge:processResources UP-TO-DATE
+> Task :version:26.1.2-neoforge:processResources UP-TO-DATE
+> Task :version:26.1.2-neoforge:createMinecraftArtifacts UP-TO-DATE
+> Task :version:1.20.1-forge:createMinecraftArtifacts UP-TO-DATE
+> Task :spotlessRepositoryFiles UP-TO-DATE
+> Task :spotlessRepositoryFilesCheck UP-TO-DATE
+> Task :spotlessKotlinGradle UP-TO-DATE
+> Task :spotlessKotlinGradleCheck UP-TO-DATE
+> Task :version:26.1.2-neoforge:sourcesJar UP-TO-DATE
+> Task :version:1.20.1-forge:sourcesJar UP-TO-DATE
+> Task :version:26.2-neoforge:sourcesJar UP-TO-DATE
+> Task :version:1.21.1-neoforge:sourcesJar UP-TO-DATE
+> Task :version:1.21.1-neoforge:createMinecraftArtifacts UP-TO-DATE
+> Task :version:26.2-fabric:sourcesJar UP-TO-DATE
+> Task :version:26.2-neoforge:createMinecraftArtifacts UP-TO-DATE
+> Task :version:1.20.1-forge:compileJava UP-TO-DATE
+> Task :version:1.20.1-forge:classes UP-TO-DATE
+> Task :version:1.20.1-forge:jar UP-TO-DATE
+> Task :version:1.20.1-forge:reobfJar UP-TO-DATE
+> Task :version:1.20.1-forge:assemble UP-TO-DATE
+> Task :version:1.20.1-forge:compileTestJava UP-TO-DATE
+> Task :version:1.20.1-forge:testClasses UP-TO-DATE
+> Task :version:1.20.1-forge:buildAndCollect UP-TO-DATE
+> Task :version:1.20.1-forge:test UP-TO-DATE
+> Task :version:1.20.1-forge:check UP-TO-DATE
+> Task :version:1.20.1-forge:build UP-TO-DATE
+> Task :version:26.2-neoforge:compileJava UP-TO-DATE
+> Task :version:26.2-neoforge:classes UP-TO-DATE
+> Task :version:26.2-neoforge:jar UP-TO-DATE
+> Task :version:26.2-neoforge:assemble UP-TO-DATE
+> Task :version:26.2-neoforge:buildAndCollect UP-TO-DATE
+> Task :version:26.2-fabric:compileJava UP-TO-DATE
+> Task :version:26.2-fabric:classes UP-TO-DATE
+> Task :version:26.2-fabric:jar UP-TO-DATE
+> Task :version:26.2-fabric:assemble UP-TO-DATE
+> Task :version:26.2-fabric:buildAndCollect UP-TO-DATE
+> Task :version:26.2-neoforge:compileTestJava UP-TO-DATE
+> Task :version:26.2-neoforge:testClasses UP-TO-DATE
+> Task :spotlessJava UP-TO-DATE
+> Task :version:26.2-neoforge:test UP-TO-DATE
+> Task :version:26.1.2-neoforge:compileJava UP-TO-DATE
+> Task :version:26.2-neoforge:check UP-TO-DATE
+> Task :version:26.1.2-neoforge:classes UP-TO-DATE
+> Task :version:26.2-neoforge:build UP-TO-DATE
+> Task :version:26.1.2-neoforge:jar UP-TO-DATE
+> Task :version:26.1.2-neoforge:assemble UP-TO-DATE
+> Task :version:26.1.2-neoforge:buildAndCollect UP-TO-DATE
+> Task :version:26.1.2-neoforge:compileTestJava UP-TO-DATE
+> Task :version:26.1.2-neoforge:testClasses UP-TO-DATE
+> Task :version:26.1.2-neoforge:test UP-TO-DATE
+> Task :version:26.1.2-neoforge:check UP-TO-DATE
+> Task :version:26.1.2-neoforge:build UP-TO-DATE
+> Task :version:26.2-fabric:compileTestJava UP-TO-DATE
+> Task :version:26.2-fabric:testClasses UP-TO-DATE
+> Task :version:1.21.1-neoforge:compileJava UP-TO-DATE
+> Task :version:1.21.1-neoforge:classes UP-TO-DATE
+> Task :version:1.21.1-neoforge:jar UP-TO-DATE
+> Task :version:1.21.1-neoforge:assemble UP-TO-DATE
+> Task :version:1.21.1-neoforge:buildAndCollect UP-TO-DATE
+> Task :version:1.21.1-neoforge:compileTestJava UP-TO-DATE
+> Task :version:1.21.1-neoforge:testClasses UP-TO-DATE
+> Task :version:26.2-fabric:test UP-TO-DATE
+> Task :version:26.2-fabric:check UP-TO-DATE
+> Task :version:26.2-fabric:build UP-TO-DATE
+> Task :version:1.21.1-neoforge:test UP-TO-DATE
+> Task :version:1.21.1-neoforge:check UP-TO-DATE
+> Task :version:1.21.1-neoforge:build UP-TO-DATE
+> Task :spotlessStructuredText
+> Task :spotlessStructuredTextCheck
+> Task :spotlessJavaCheck UP-TO-DATE
+> Task :spotlessCheck
+
+> Task :verifyRepositoryProfiles
+{
+  "schemaVersion": 1,
+  "profileRecords": 30,
+  "verifiedRecords": 30,
+  "verifiedExistingInstances": 30,
+  "externalPaths": 0,
+  "status": "PASS"
+}
+
+> Task :verifyTargets
+PASS: five complete target source trees and target facts.
+
+> Task :collectArtifacts
+> Task :buildAll
+> Task :testAll
+> Task :checkAll
+
+BUILD SUCCESSFUL in 11s
+60 actionable tasks: 4 executed, 56 up-to-date
+Configuration cache entry stored.

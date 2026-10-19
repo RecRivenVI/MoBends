@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $repository = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
-$profilesRoot = (Resolve-Path -LiteralPath (Join-Path $repository 'run\profiles')).Path
+$profilesRoot = (Resolve-Path -LiteralPath (Join-Path $repository 'validations/regression-client-runtime/task/profiles')).Path
 
 function Resolve-RepositoryRelativePath([string] $RelativePath) {
     if ([IO.Path]::IsPathRooted($RelativePath)) { throw "Repository path must be relative: $RelativePath" }
@@ -63,7 +63,7 @@ else {
     @(Get-ChildItem -LiteralPath $profilesRoot -File -Recurse -Filter '*.json' | Select-Object -ExpandProperty FullName)
 }
 
-$cacheDirectory = Join-Path $repository 'run\cache\mods'
+$cacheDirectory = Join-Path $repository 'validations/regression-client-runtime/instance/artifact-cache/mods'
 $results = foreach ($recordPath in $recordPaths) {
     if (-not $recordPath.StartsWith($profilesRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
         throw "Profile record is outside the repository profile root: $recordPath"
@@ -72,9 +72,9 @@ $results = foreach ($recordPath in $recordPaths) {
     $record = Get-Content -LiteralPath $recordPath -Raw | ConvertFrom-Json
     $gameDirectory = Resolve-RepositoryRelativePath ([string] $record.gameDirectory)
     $modsDirectory = Resolve-RepositoryRelativePath ([string] $record.modsDirectory)
-    $instancesRoot = [IO.Path]::GetFullPath((Join-Path $repository 'run\instances'))
+    $instancesRoot = [IO.Path]::GetFullPath((Join-Path $repository 'validations/regression-client-runtime/instance'))
     if (-not $gameDirectory.StartsWith($instancesRoot + '\', [StringComparison]::OrdinalIgnoreCase)) {
-        throw "Profile gameDirectory is outside run/instances: $recordPath"
+        throw "Profile gameDirectory is outside validations/regression-client-runtime/instance: $recordPath"
     }
     if ($modsDirectory -ne (Join-Path $gameDirectory 'mods')) {
         throw "Profile modsDirectory must equal gameDirectory/mods: $recordPath"

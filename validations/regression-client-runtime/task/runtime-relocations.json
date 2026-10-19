@@ -1,0 +1,8 @@
+[
+  {
+    "from": "validations/regression-client-runtime/instance/legacy/port-92c5960/26.2-fabric/client/primary/s2",
+    "to": "instances/26.2-fabric/client",
+    "classification": "B",
+    "reason": "This task's continuous shared user/agent Fabric client testing; original run/fabric-26.2/client ownership established by the 20260824 runtime-source-identification and destination manifests."
+  }
+]

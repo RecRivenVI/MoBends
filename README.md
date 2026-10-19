@@ -1,4 +1,25 @@
 # Mo' Bends
+
+The current multi-target port lives in `versions/<target>/`, with Gradle tasks
+addressed as `:version:<target>:<task>`. Implemented targets are Forge 1.20.1,
+NeoForge 1.21.1, NeoForge 26.1.2, Fabric 26.2 and NeoForge 26.2.
+
+Use JDK 25 to run the Gradle 9.7.1 Wrapper; each Target selects its own Java
+toolchain. Start with the [current development guide](documents/development/guide-development.md),
+[runtime validation](validations/regression-client-runtime/validation.md), and
+[migration verification](validations/migration-project-layout/validation.md).
+
+```powershell
+.\gradlew.bat projects
+.\gradlew.bat verifyTargets testAll checkAll buildAll collectArtifacts
+.\gradlew.bat :version:26.2-fabric:test
+```
+
+The material below is the upstream project introduction and historical 1.12.2
+development guidance, not the current build procedure. An exact pre-migration
+copy is kept in [the upstream reference](documents/reference/guide-upstream-readme.md).
+
+## Upstream project introduction
 [![CurseForge Downloads](http://cf.way2muchnoise.eu/231347.svg)](https://www.curseforge.com/minecraft/mc-mods/mo-bends) [![Mod Versions](http://cf.way2muchnoise.eu/versions/231347.svg)](https://www.curseforge.com/minecraft/mc-mods/mo-bends) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/dc7fa82e8d904f65b33b948ed093c21f)](https://app.codacy.com/gh/mobends/MoBends?utm_source=github.com&utm_medium=referral&utm_content=mobends/MoBends&utm_campaign=Badge_Grade_Dashboard)
 
 

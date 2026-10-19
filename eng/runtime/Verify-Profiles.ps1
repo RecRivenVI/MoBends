@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $repository = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
-$profilesRoot = (Resolve-Path -LiteralPath (Join-Path $repository 'run\profiles')).Path
+$profilesRoot = (Resolve-Path -LiteralPath (Join-Path $repository 'validations/regression-client-runtime/task/profiles')).Path
 
 function Resolve-RepositoryRelativePath([string] $RelativePath) {
     if ([IO.Path]::IsPathRooted($RelativePath)) { throw "Repository path must be relative: $RelativePath" }
@@ -67,7 +67,7 @@ foreach ($recordPath in $recordsToVerify) {
     $definition = $definitions | Where-Object { $_.Profile -eq $record.profile -and $_.Role -eq $record.role } | Select-Object -First 1
     if (-not $definition) { throw "Unauthorized profile/role: $recordPath" }
 
-    $expectedGameDirectory = "run/instances/$($record.node)/$($definition.Side)/$($record.profile.ToLowerInvariant())"
+    $expectedGameDirectory = "validations/regression-client-runtime/instance/$($record.node)/$($definition.Side)/$($record.profile.ToLowerInvariant())"
     $expectedModsDirectory = "$expectedGameDirectory/mods"
     if ($record.gameDirectory -ne $expectedGameDirectory -or $record.modsDirectory -ne $expectedModsDirectory) {
         throw "Profile repository-relative directory mismatch: $recordPath"

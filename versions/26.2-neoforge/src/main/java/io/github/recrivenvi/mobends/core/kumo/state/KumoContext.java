@@ -1,0 +1,33 @@
+package io.github.recrivenvi.mobends.core.kumo.state;
+
+import io.github.recrivenvi.mobends.core.data.EntityData;
+
+/** A simple implementation of the KUMO context. */
+public class KumoContext implements IKumoContext {
+
+    public EntityData<?> entityData;
+
+    public ILayerState layerState;
+
+    public INodeState currentNode;
+
+    @Override
+    public EntityData<?> getEntityData() {
+        return entityData;
+    }
+
+    @Override
+    public ILayerState getLayerState() {
+        return layerState;
+    }
+
+    @Override
+    public INodeState getCurrentNode() {
+        return currentNode;
+    }
+
+    @Override
+    public void setCurrentNode(INodeState node) {
+        currentNode = node;
+    }
+}

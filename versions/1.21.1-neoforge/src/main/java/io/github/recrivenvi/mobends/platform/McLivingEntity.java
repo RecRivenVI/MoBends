@@ -136,7 +136,8 @@ public class McLivingEntity extends McEntity implements ILivingEntity {
     }
 
     @Override
-    @Nullable public IEntity getVehicle() {
+    @Nullable
+    public IEntity getVehicle() {
         if (livingEntity.getVehicle() == null) {
             return null;
         }

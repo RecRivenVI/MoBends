@@ -1,0 +1,25 @@
+[all]
+memory-max = "4G"
+width = 2560
+height = 1440
+
+[client]
+player-name = "RecRivenVI"
+jvm-args = ["-Dcustomskinloader.ignorePatchFailure=true"]
+mods = ["customskinloader-bootstrap"]
+
+[client-multiplayer]
+player-name = "CNN_MOYAN"
+jvm-args = ["-Dcustomskinloader.ignorePatchFailure=true"]
+mods = ["customskinloader-bootstrap"]
+
+[targets."26.3-fabric".client]
+mods = ["customskinloader-bootstrap", "modmenu"]
+
+[targets."26.3-fabric".client-multiplayer]
+mods = ["customskinloader-bootstrap", "modmenu"]
+
+[targets."26.3-neoforge".client]
+mods = ["customskinloader-acceptance", "minecraft_protocol_probe"]
+jvm-args = []
+game-args = ["--quickPlaySingleplayer", "Template Migration"]

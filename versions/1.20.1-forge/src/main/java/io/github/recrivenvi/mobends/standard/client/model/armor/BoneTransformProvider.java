@@ -32,7 +32,8 @@ public class BoneTransformProvider {
      * @param entityData The entity's animation data
      * @return The transform, or null if not found
      */
-    @Nullable public ModelPartTransform getTransform(BoneRegion region, BipedEntityData<?> entityData) {
+    @Nullable
+    public ModelPartTransform getTransform(BoneRegion region, BipedEntityData<?> entityData) {
         if (entityData == null) return null;
 
         return switch (region) {

@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge || target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.core.util;
 
 import io.github.recrivenvi.mobends.api.resource.ResourceLocationHelper;
@@ -114,4 +113,3 @@ public final class ResourceLocationFactory {
         throw new IllegalStateException("No ResourceLocation parse method available");
     }
 }
-// ?}

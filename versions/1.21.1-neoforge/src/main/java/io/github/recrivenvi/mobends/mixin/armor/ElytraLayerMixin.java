@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.mixin.armor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -39,4 +38,3 @@ public abstract class ElytraLayerMixin<T extends LivingEntity> {
         // model's transform. Additional adjustments can be applied here if needed.
     }
 }
-// ?}

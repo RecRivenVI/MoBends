@@ -1,6 +1,0 @@
-{
-  "pack": {
-    "description": "Mo' Bends resources",
-    ${pack_format_fields}
-  }
-}

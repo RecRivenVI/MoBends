@@ -101,7 +101,8 @@ public class ArmorGeometryCache {
         }
 
         /** Get all vertices for a specific bone. */
-        @Nullable public List<SliceResult.SlicedVertex> getVerticesForBone(BoneRegion bone) {
+        @Nullable
+        public List<SliceResult.SlicedVertex> getVerticesForBone(BoneRegion bone) {
             lastAccessTime = System.currentTimeMillis();
             accessCount++;
             return verticesByBone.get(bone);
@@ -153,12 +154,14 @@ public class ArmorGeometryCache {
     private long misses = 0;
 
     /** Get cached geometry for a model/slot/state combination. */
-    @Nullable public GeometryEntry get(Class<?> modelClass, EquipmentSlot slot, int modelStateHash) {
+    @Nullable
+    public GeometryEntry get(Class<?> modelClass, EquipmentSlot slot, int modelStateHash) {
         return get(new GeometryKey(modelClass, slot, modelStateHash));
     }
 
     /** Get cached geometry by key. */
-    @Nullable public GeometryEntry get(GeometryKey key) {
+    @Nullable
+    public GeometryEntry get(GeometryKey key) {
         GeometryEntry entry = cache.get(key);
         if (entry != null) {
             // Check if entry is still valid

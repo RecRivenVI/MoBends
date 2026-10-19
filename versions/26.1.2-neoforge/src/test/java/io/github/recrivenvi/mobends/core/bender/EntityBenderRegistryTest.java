@@ -1,4 +1,3 @@
-// ? if target_26_1_2_neoforge || target_26_2_fabric || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.core.bender;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -55,4 +54,3 @@ public class EntityBenderRegistryTest {
         assertNull(registry.findRegisteredBenderForEntityClass(GlowSquid.class));
     }
 }
-// ?}

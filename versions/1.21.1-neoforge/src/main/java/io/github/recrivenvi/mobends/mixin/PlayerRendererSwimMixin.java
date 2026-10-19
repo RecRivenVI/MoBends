@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge || target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.mixin;
 
 import io.github.recrivenvi.mobends.core.bender.EntityBender;
@@ -27,4 +26,3 @@ public abstract class PlayerRendererSwimMixin {
                 entity.getSwimAmount(partialTick), mobendsAnimated);
     }
 }
-// ?}

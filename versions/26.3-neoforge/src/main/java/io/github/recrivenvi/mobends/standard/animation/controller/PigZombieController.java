@@ -1,0 +1,62 @@
+package io.github.recrivenvi.mobends.standard.animation.controller;
+
+import io.github.recrivenvi.mobends.core.animation.bit.AnimationBit;
+import io.github.recrivenvi.mobends.core.animation.controller.IAnimationController;
+import io.github.recrivenvi.mobends.core.animation.layer.HardAnimationLayer;
+import io.github.recrivenvi.mobends.core.client.event.DataUpdateHandler;
+import io.github.recrivenvi.mobends.standard.animation.bit.biped.AttackSlashInwardAnimationBit;
+import io.github.recrivenvi.mobends.standard.animation.bit.biped.JumpAnimationBit;
+import io.github.recrivenvi.mobends.standard.animation.bit.pigzombie.StandAnimationBit;
+import io.github.recrivenvi.mobends.standard.animation.bit.pigzombie.WalkAnimationBit;
+import io.github.recrivenvi.mobends.standard.data.BipedEntityData;
+import io.github.recrivenvi.mobends.standard.data.PigZombieData;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
+
+//
+// This is an animation controller for a zombie instance. It's a part of the EntityData structure.
+//
+public class PigZombieController implements IAnimationController<PigZombieData> {
+
+    protected HardAnimationLayer<BipedEntityData<ZombifiedPiglin>> layerBase;
+    protected HardAnimationLayer<BipedEntityData<?>> layerAction;
+    protected AnimationBit<? extends BipedEntityData<ZombifiedPiglin>> bitStand, bitWalk, bitJump;
+    protected AttackSlashInwardAnimationBit bitAttack;
+
+    public PigZombieController() {
+        this.layerBase = new HardAnimationLayer<>();
+        this.layerAction = new HardAnimationLayer<>();
+        this.bitStand = new StandAnimationBit();
+        this.bitWalk = new WalkAnimationBit();
+        this.bitJump = new JumpAnimationBit<>();
+        this.bitAttack = new AttackSlashInwardAnimationBit();
+    }
+
+    @Override
+    public Collection<String> perform(PigZombieData pigZombieData) {
+        ZombifiedPiglin pigZombie = pigZombieData.getEntity();
+
+        if (!pigZombieData.isOnGround() || pigZombieData.getTicksAfterTouchdown() < 1) {
+            this.layerBase.playOrContinueBit(bitJump, pigZombieData);
+        } else {
+            if (pigZombieData.isStillHorizontally()) {
+                this.layerBase.playOrContinueBit(bitStand, pigZombieData);
+            } else {
+                this.layerBase.playOrContinueBit(bitWalk, pigZombieData);
+            }
+        }
+
+        if (pigZombie.getSwingAnimation(DataUpdateHandler.partialTicks) > 0) {
+            this.layerAction.playOrContinueBit(this.bitAttack, pigZombieData);
+        } else {
+            this.layerAction.clearAnimation();
+        }
+
+        List<String> actions = new ArrayList<>();
+        this.layerBase.perform(pigZombieData, actions);
+        this.layerAction.perform(pigZombieData, actions);
+        return actions;
+    }
+}

@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.core.client.gui;
 
 import io.github.recrivenvi.mobends.core.pack.LocalBendsPack;
@@ -195,4 +194,3 @@ final class BendsPackSelectionList121
         }
     }
 }
-// ?}

@@ -1,0 +1,11 @@
+tool = "acceptance_checks"
+targets = ["26.3-neoforge"]
+
+[instances.client]
+memory-max = "4G"
+width = 1920
+height = 1080
+player-name = "RecRivenVI"
+mods = ["customskinloader-bootstrap"]
+jvm-args = ["-Dcustomskinloader.ignorePatchFailure=true"]
+game-args = ["--quickPlaySingleplayer", "Template Migration"]

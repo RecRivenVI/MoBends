@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.mixin.armor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -162,12 +161,14 @@ public abstract class HumanoidArmorLayerMixin<
     }
 
     // Check if Mo'Bends rendering should be used for this entity.
-    @Unique private boolean mobends$shouldUseMoBendsRendering(T entity) {
+    @Unique
+    private boolean mobends$shouldUseMoBendsRendering(T entity) {
         return EntityDatabase.instance.get(entity) != null;
     }
 
     // Get the Mo'Bends entity data for an entity.
-    @Unique @SuppressWarnings("unchecked")
+    @Unique
+    @SuppressWarnings("unchecked")
     private BipedEntityData<?> mobends$getEntityData(T entity) {
         Object data = EntityDatabase.instance.get(entity);
         if (data instanceof BipedEntityData<?>) {
@@ -177,7 +178,8 @@ public abstract class HumanoidArmorLayerMixin<
     }
 
     // Get or create the armor rendering facade.
-    @Unique private ArmorRenderingFacade mobends$getArmorFacade() {
+    @Unique
+    private ArmorRenderingFacade mobends$getArmorFacade() {
         if (mobends$armorFacade == null) {
             mobends$armorFacade = new ArmorRenderingFacade();
         }
@@ -190,7 +192,8 @@ public abstract class HumanoidArmorLayerMixin<
     // split joints (elbows/knees) are not supported for trim rendering as vanilla armor models
     // don't have them.
     //
-    @Unique private void mobends$syncTransformsToModel(A armorModel, BipedEntityData<?> entityData) {
+    @Unique
+    private void mobends$syncTransformsToModel(A armorModel, BipedEntityData<?> entityData) {
         // Reusable vector for Euler angle extraction
         Vector3f eulerAngles = new Vector3f();
 
@@ -238,7 +241,8 @@ public abstract class HumanoidArmorLayerMixin<
     }
 
     // Convert a Mo'Bends quaternion to Euler angles and apply to a ModelPart.
-    @Unique private void mobends$applyQuaternionToModelPart(
+    @Unique
+    private void mobends$applyQuaternionToModelPart(
             net.minecraft.client.model.geom.ModelPart part, Quaternion quat, Vector3f eulerOut) {
         // Convert Mo'Bends Quaternion to JOML Quaternionf
         Quaternionf jomlQuat = new Quaternionf(quat.x, quat.y, quat.z, quat.w);
@@ -252,4 +256,3 @@ public abstract class HumanoidArmorLayerMixin<
         part.zRot = eulerOut.z;
     }
 }
-// ?}

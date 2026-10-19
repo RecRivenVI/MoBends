@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.mixin.armor;
 
 import net.minecraft.client.model.HumanoidModel;
@@ -19,4 +18,3 @@ public abstract class ArmorTrimLayerMixin<
         // has been transformed by Mo'Bends, the trim will automatically follow.
     }
 }
-// ?}

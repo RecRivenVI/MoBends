@@ -59,7 +59,8 @@ public interface IPlatformServices {
      * @param nativeEntity The native Minecraft entity
      * @return The wrapped entity, or null if not applicable
      */
-    @Nullable IEntity wrapEntity(Object nativeEntity);
+    @Nullable
+    IEntity wrapEntity(Object nativeEntity);
 
     /**
      * Wraps a native entity object into an ILivingEntity
@@ -67,7 +68,8 @@ public interface IPlatformServices {
      * @param nativeEntity The native Minecraft LivingEntity
      * @return The wrapped living entity, or null if not applicable
      */
-    @Nullable ILivingEntity wrapLivingEntity(Object nativeEntity);
+    @Nullable
+    ILivingEntity wrapLivingEntity(Object nativeEntity);
 
     /**
      * Wraps a native entity object into an IPlayer
@@ -75,7 +77,8 @@ public interface IPlatformServices {
      * @param nativeEntity The native Minecraft Player
      * @return The wrapped player, or null if not applicable
      */
-    @Nullable IPlayer wrapPlayer(Object nativeEntity);
+    @Nullable
+    IPlayer wrapPlayer(Object nativeEntity);
 
     /**
      * Wraps a native PoseStack object
@@ -131,7 +134,8 @@ public interface IPlatformServices {
      * @param location The location string
      * @return The resource path, or null if invalid
      */
-    @Nullable IResourcePath parseResourcePath(String location);
+    @Nullable
+    IResourcePath parseResourcePath(String location);
 
     /**
      * @return The tesselator instance for immediate-mode rendering

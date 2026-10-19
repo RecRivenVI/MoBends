@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge;
 
 import com.mojang.logging.LogUtils;
@@ -45,7 +44,8 @@ public class ForgeCore extends Core {
         EntityBenderRegistry.instance.applyConfiguration(configuration);
     }
 
-    @Nullable public static ForgeCore getInstance() {
+    @Nullable
+    public static ForgeCore getInstance() {
         return INSTANCE;
     }
 
@@ -54,4 +54,3 @@ public class ForgeCore extends Core {
         new ForgeCore();
     }
 }
-// ?}

@@ -1,4 +1,3 @@
-// ? if target_26_1_2_neoforge || target_26_2_fabric || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.core.client.gui;
 
 import com.mojang.logging.LogUtils;
@@ -437,4 +436,3 @@ public final class LocalPacksScreen26 extends Screen {
         return false;
     }
 }
-// ?}

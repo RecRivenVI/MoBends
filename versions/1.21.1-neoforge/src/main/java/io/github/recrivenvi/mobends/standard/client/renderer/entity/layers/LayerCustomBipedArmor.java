@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge || target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.standard.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -576,4 +575,3 @@ public class LayerCustomBipedArmor<E extends LivingEntity, M extends HumanoidMod
         }
     }
 }
-// ?}

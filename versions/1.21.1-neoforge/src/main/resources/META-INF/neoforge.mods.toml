@@ -1,4 +1,5 @@
-${neoforge_loader_header}
+modLoader = "javafml"
+loaderVersion = "[4,)"
 license = "${mod_license}"
 issueTrackerURL = "https://github.com/RecRivenVI/MoBends/issues"
 
@@ -7,23 +8,23 @@ modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 displayURL = "https://github.com/RecRivenVI/MoBends"
-${mod_icon_property} = "${mod_icon_path}"
+logoFile = "icon.png"
 authors = "${mod_authors}"
-description = '''${mod_description}'''
-
-[[mixins]]
-config = "mobends-neoforge.mixins.json"
+description = "${mod_description}"
 
 [[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
-versionRange = "${loader_version_range}"
+versionRange = "[${loader_version},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"
-versionRange = "${minecraft_version_range}"
+versionRange = "[${minecraft_version}]"
 ordering = "NONE"
 side = "BOTH"
+
+[[mixins]]
+config = "mobends-neoforge.mixins.json"

@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.network;
 
 import io.github.recrivenvi.mobends.core.network.NetworkConfiguration;
@@ -56,4 +55,3 @@ public final class ForgeNetwork {
                 SERVER_CONFIG.isMovementLimited());
     }
 }
-// ?}

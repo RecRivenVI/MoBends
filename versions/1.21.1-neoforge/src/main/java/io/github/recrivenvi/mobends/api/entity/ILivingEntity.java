@@ -134,7 +134,8 @@ public interface ILivingEntity extends IEntity {
     /**
      * @return The vehicle this entity is riding, or null if not riding
      */
-    @Nullable IEntity getVehicle();
+    @Nullable
+    IEntity getVehicle();
 
     /**
      * Calculates the interpolated body yaw

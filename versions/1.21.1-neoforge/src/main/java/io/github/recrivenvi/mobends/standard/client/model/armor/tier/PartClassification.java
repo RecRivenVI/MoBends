@@ -82,7 +82,8 @@ public class PartClassification {
         return modelPart;
     }
 
-    @Nullable public String getPartName() {
+    @Nullable
+    public String getPartName() {
         return partName;
     }
 
@@ -137,7 +138,8 @@ public class PartClassification {
      *
      * @return The child classification, or null if not found
      */
-    @Nullable public PartClassification getChildClassification(String childName) {
+    @Nullable
+    public PartClassification getChildClassification(String childName) {
         return childClassifications.get(childName);
     }
 

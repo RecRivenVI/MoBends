@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -77,4 +76,3 @@ public class ForgeTesselator implements ITesselator {
         };
     }
 }
-// ?}

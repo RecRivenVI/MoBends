@@ -73,7 +73,8 @@ public class ArmorAssignmentCache {
         }
 
         /** Get all vertex indices assigned to a specific bone. */
-        @Nullable public List<Integer> getVerticesForBone(BoneRegion bone) {
+        @Nullable
+        public List<Integer> getVerticesForBone(BoneRegion bone) {
             return vertexIndicesByBone.get(bone);
         }
 
@@ -118,12 +119,14 @@ public class ArmorAssignmentCache {
      * @param slot The equipment slot
      * @return Cached entry, or null if not cached
      */
-    @Nullable public AssignmentEntry get(Class<?> modelClass, EquipmentSlot slot) {
+    @Nullable
+    public AssignmentEntry get(Class<?> modelClass, EquipmentSlot slot) {
         return get(new CacheKey(modelClass, slot));
     }
 
     /** Get cached bone assignments by key. */
-    @Nullable public AssignmentEntry get(CacheKey key) {
+    @Nullable
+    public AssignmentEntry get(CacheKey key) {
         AssignmentEntry entry = cache.get(key);
         if (entry != null) {
             hits++;

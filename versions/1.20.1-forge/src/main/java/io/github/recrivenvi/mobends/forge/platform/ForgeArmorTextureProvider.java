@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import io.github.recrivenvi.mobends.api.armor.IArmorTextureProvider;
@@ -18,7 +17,8 @@ import net.minecraft.world.item.ItemStack;
 //
 public class ForgeArmorTextureProvider implements IArmorTextureProvider {
     @Override
-    @Nullable public <E extends LivingEntity> ResourceLocation getArmorTexture(
+    @Nullable
+    public <E extends LivingEntity> ResourceLocation getArmorTexture(
             ArmorItem armorItem,
             ItemStack itemStack,
             E entity,
@@ -35,4 +35,3 @@ public class ForgeArmorTextureProvider implements IArmorTextureProvider {
         return null;
     }
 }
-// ?}

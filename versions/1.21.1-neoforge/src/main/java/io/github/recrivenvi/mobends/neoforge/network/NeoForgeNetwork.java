@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge || target_26_1_2_neoforge || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.neoforge.network;
 
 import io.github.recrivenvi.mobends.core.network.NetworkConfiguration;
@@ -43,4 +42,3 @@ public final class NeoForgeNetwork {
                 SERVER_CONFIG.isMovementLimited());
     }
 }
-// ?}

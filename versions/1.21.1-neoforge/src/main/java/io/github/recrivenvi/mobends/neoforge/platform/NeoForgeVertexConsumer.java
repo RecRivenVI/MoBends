@@ -1,4 +1,3 @@
-// ? if target_1_21_1_neoforge || target_26_1_2_neoforge || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.neoforge.platform;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -74,4 +73,3 @@ public class NeoForgeVertexConsumer implements IVertexConsumer {
         return consumer;
     }
 }
-// ?}

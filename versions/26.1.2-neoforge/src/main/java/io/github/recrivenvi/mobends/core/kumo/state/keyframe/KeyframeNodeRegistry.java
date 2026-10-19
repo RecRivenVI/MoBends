@@ -27,7 +27,8 @@ public class KeyframeNodeRegistry {
         registry.put(key, new KeyframeNodeRegistry.RegistryEntry<T>(factory, templateType));
     }
 
-    @Nullable public Type getTemplateClass(String key) {
+    @Nullable
+    public Type getTemplateClass(String key) {
         if (registry.containsKey(key)) {
             return registry.get(key).nodeType;
         }

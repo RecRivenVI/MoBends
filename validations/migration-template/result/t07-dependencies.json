@@ -1,0 +1,867 @@
+[
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/armor/ArmorModelProviderHolder.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.api.armor.ArmorModelProviderHolder",
+      "io.github.recrivenvi.mobends.api.armor.IArmorModelProvider",
+      "net.minecraft.client.model.HumanoidModel"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/entity/IItemStack.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x API declares crossbow, trident and spyglass predicates that the 26.x API does not declare. Preserve each published Target contract; a universal replacement would change it.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/entity/ILivingEntity.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Depends on the Target-specific IItemStack contract through equipment and hand methods.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/entity/IPlayer.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Extends ILivingEntity, whose item contract is Target-specific.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/platform/IPlatformServices.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Exposes the Target-specific item, living-entity and player API contracts.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/platform/PlatformServices.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Loads the Target-specific IPlatformServices contract and its Loader implementation through ServiceLoader.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/rendering/IRenderContext.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Exposes ILivingEntity, whose item contract is Target-specific.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/api/rendering/ITesselator.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "Uses PlatformServices, whose service contract depends on Target-specific item and entity APIs.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/addon/AddonHelper.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.addon.AddonHelper",
+      "io.github.recrivenvi.mobends.core.addon.Addons",
+      "io.github.recrivenvi.mobends.core.addon.AddonAnimationRegistry",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/addon/Addons.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.addon.Addons",
+      "io.github.recrivenvi.mobends.core.addon.AddonAnimationRegistry",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/addon/IAddon.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.addon.IAddon",
+      "io.github.recrivenvi.mobends.core.addon.AddonAnimationRegistry",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/bit/AnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.bit.AnimationBit",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/controller/IAnimationController.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.controller.IAnimationController",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/layer/AnimationLayer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.layer.AnimationLayer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/layer/HardAnimationLayer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.layer.HardAnimationLayer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/layer/KeyframeAnimationLayer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.layer.KeyframeAnimationLayer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/animation/layer/NodeAnimationLayer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.animation.layer.NodeAnimationLayer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/client/ClientRuntime.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.client.ClientRuntime",
+      "io.github.recrivenvi.mobends.standard.main.ModConfig",
+      "net.minecraft.core.registries.BuiltInRegistries"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/client/event/DataUpdateHandler.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x implementation supports preview tick overrides; the 26.x implementation does not. Unification would change the existing timing/preview API and behavior.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/client/model/BoxFactory.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.client.model.BoxFactory",
+      "io.github.recrivenvi.mobends.core.client.model.ModelPart",
+      "com.mojang.blaze3d.vertex.PoseStack"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/client/model/BoxMutator.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.client.model.BoxMutator",
+      "io.github.recrivenvi.mobends.core.client.model.ModelPart",
+      "com.mojang.blaze3d.vertex.PoseStack"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/KumoSerializer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.KumoSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.serializer.TriggerConditionTemplateSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/ConnectionState.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.ConnectionState",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/IKumoContext.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.IKumoContext",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/INodeState.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.INodeState",
+      "io.github.recrivenvi.mobends.core.kumo.state.ConnectionState",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/KumoAnimatorState.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.KumoAnimatorState",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/KumoContext.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.KumoContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/AndCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.AndCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/ExpressionCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ExpressionCondition",
+      "io.github.recrivenvi.mobends.core.kumo.KumoExpressionContext",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/ITriggerCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/ITriggerConditionContext.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/ITriggerConditionFactory.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionFactory",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/NotCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.NotCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/OrCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.OrCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/StateCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.StateCondition",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/TicksPassedCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TicksPassedCondition",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.ITriggerConditionContext",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/condition/TriggerConditionRegistry.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/keyframe/IKeyframeNodeFactory.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.IKeyframeNodeFactory",
+      "io.github.recrivenvi.mobends.core.kumo.state.INodeState",
+      "io.github.recrivenvi.mobends.core.kumo.state.ConnectionState",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/keyframe/KeyframeLayerState.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.KeyframeLayerState",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/keyframe/KeyframeNodeRegistry.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.KeyframeNodeRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.MovementKeyframeNode",
+      "io.github.recrivenvi.mobends.core.data.LivingEntityData",
+      "net.minecraft.core.BlockPos"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/keyframe/MovementKeyframeNode.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.MovementKeyframeNode",
+      "io.github.recrivenvi.mobends.core.data.LivingEntityData",
+      "net.minecraft.core.BlockPos"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/keyframe/StandardKeyframeNode.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.StandardKeyframeNode",
+      "io.github.recrivenvi.mobends.core.kumo.state.ConnectionState",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/serializer/KeyframeNodeSerializer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.serializer.KeyframeNodeSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.KeyframeNodeRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.keyframe.MovementKeyframeNode",
+      "io.github.recrivenvi.mobends.core.data.LivingEntityData",
+      "net.minecraft.core.BlockPos"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/serializer/LayerTemplateSerializer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.serializer.LayerTemplateSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.KumoSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.serializer.TriggerConditionTemplateSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/serializer/TriggerConditionTemplateSerializer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.serializer.TriggerConditionTemplateSerializer",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/AnimatorTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.AnimatorTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerType",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/LayerTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerType",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/LayerType.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerType",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/keyframe/ConnectionTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/keyframe/KeyframeLayerTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/keyframe/KeyframeNodeTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeNodeTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/keyframe/MovementKeyframeNodeTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.MovementKeyframeNodeTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeNodeTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/keyframe/StandardKeyframeNodeTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.StandardKeyframeNodeTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeNodeTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/kumo/state/template/procedural/ProceduralLayerTemplate.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.kumo.state.template.procedural.ProceduralLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.LayerType",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.KeyframeLayerTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.template.keyframe.ConnectionTemplate",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.TriggerConditionRegistry",
+      "io.github.recrivenvi.mobends.core.kumo.state.condition.EquipmentNameCondition",
+      "net.minecraft.world.entity.Entity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/BendsPackData.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.BendsPackData",
+      "io.github.recrivenvi.mobends.core.animation.keyframe.AnimationLoader",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/BendsPackPerformer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.BendsPackPerformer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/LegacyBendsPackPerformer.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.LegacyBendsPackPerformer",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/LocalBendsPack.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.LocalBendsPack",
+      "io.github.recrivenvi.mobends.core.pack.LegacyBendsPackParser",
+      "com.mojang.logging.LogUtils"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/PackCombiner.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.PackCombiner",
+      "io.github.recrivenvi.mobends.core.pack.BendsPackData",
+      "io.github.recrivenvi.mobends.core.animation.keyframe.AnimationLoader",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/PackDataProvider.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.PackDataProvider",
+      "io.github.recrivenvi.mobends.core.pack.PackManager",
+      "com.mojang.logging.LogUtils"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/pack/state/PackAnimationState.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.pack.state.PackAnimationState",
+      "io.github.recrivenvi.mobends.core.data.EntityData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/util/ModelUtils.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.core.util.ModelUtils",
+      "io.github.recrivenvi.mobends.core.client.model.IModelPart",
+      "com.mojang.blaze3d.vertex.PoseStack"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/core/util/SerialHelper.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x parser uses ByteArrayBuffer and per-byte reads; 26.x uses an allocated byte array and readFully. Allocation/error behavior is not silently unified during a behavior-preserving migration.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/biped/SittingAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.biped.SittingAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.BipedEntityData",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/pigzombie/StandAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.pigzombie.StandAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.PigZombieData",
+      "net.minecraft.world.entity.monster.ZombifiedPiglin"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/player/SprintAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.player.SprintAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.PlayerData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/player/WalkAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.player.WalkAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.PlayerData",
+      "net.minecraft.client.Minecraft"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/skeleton/StandAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.skeleton.StandAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.SkeletonData",
+      "net.minecraft.world.entity.monster.Skeleton"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/bit/zombie_base/ZombieLeanAnimationBit.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.bit.zombie_base.ZombieLeanAnimationBit",
+      "io.github.recrivenvi.mobends.standard.data.ZombieData",
+      "net.minecraft.world.entity.monster.Zombie"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/controller/ZombieController.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.controller.ZombieController",
+      "io.github.recrivenvi.mobends.standard.data.ZombieData",
+      "net.minecraft.world.entity.monster.Zombie"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/animation/controller/ZombieVillagerController.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.animation.controller.ZombieVillagerController",
+      "io.github.recrivenvi.mobends.standard.data.ZombieVillagerData",
+      "net.minecraft.world.entity.monster.ZombieVillager"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/client/model/armor/cache/CacheManager.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.client.model.armor.cache.CacheManager",
+      "io.github.recrivenvi.mobends.standard.client.model.armor.cache.ArmorAssignmentCache",
+      "net.minecraft.world.entity.EquipmentSlot"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/client/model/armor/tier1/Tier1PoseResolver.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.client.model.armor.tier1.Tier1PoseResolver",
+      "io.github.recrivenvi.mobends.standard.data.BipedEntityData",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/1.20.1-forge/src/main/java/io/github/recrivenvi/mobends/standard/kumo/WolfStateCondition.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.kumo.WolfStateCondition",
+      "io.github.recrivenvi.mobends.standard.data.WolfData",
+      "net.minecraft.world.entity.animal.Wolf"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/26.1.2-neoforge/src/main/java/io/github/recrivenvi/mobends/api/entity/IItemStack.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x API declares crossbow, trident and spyglass predicates that the 26.x API does not declare. Preserve each published Target contract; a universal replacement would change it.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/26.1.2-neoforge/src/main/java/io/github/recrivenvi/mobends/core/client/event/DataUpdateHandler.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x implementation supports preview tick overrides; the 26.x implementation does not. Unification would change the existing timing/preview API and behavior.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/26.1.2-neoforge/src/main/java/io/github/recrivenvi/mobends/core/util/SerialHelper.java",
+    "status": "RETAINED_TARGET_API_VARIANT",
+    "reason": "The 1.x parser uses ByteArrayBuffer and per-byte reads; 26.x uses an allocated byte array and readFully. Allocation/error behavior is not silently unified during a behavior-preserving migration.",
+    "chain": null,
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  },
+  {
+    "path": "versions/26.1.2-neoforge/src/main/java/io/github/recrivenvi/mobends/standard/client/model/armor/tier1/Tier1PoseResolver.java",
+    "status": "RETAINED_TRANSITIVE_GAME_DEPENDENCY",
+    "reason": "This type is coupled to the Target native implementation through the recorded import chain.",
+    "chain": [
+      "io.github.recrivenvi.mobends.standard.client.model.armor.tier1.Tier1PoseResolver",
+      "io.github.recrivenvi.mobends.standard.data.BipedEntityData",
+      "net.minecraft.world.entity.LivingEntity"
+    ],
+    "gate": "T-07 remains an unpassed strict-compliance finding; retention authorized by user on 2026-10-19."
+  }
+]

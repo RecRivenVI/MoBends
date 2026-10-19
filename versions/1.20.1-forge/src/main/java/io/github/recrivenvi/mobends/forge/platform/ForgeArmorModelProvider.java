@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import io.github.recrivenvi.mobends.api.armor.IArmorModelProvider;
@@ -34,4 +33,3 @@ public class ForgeArmorModelProvider implements IArmorModelProvider {
         return defaultModel;
     }
 }
-// ?}

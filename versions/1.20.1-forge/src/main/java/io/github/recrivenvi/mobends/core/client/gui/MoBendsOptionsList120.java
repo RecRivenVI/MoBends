@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.core.client.gui;
 
 import java.util.ArrayList;
@@ -99,4 +98,3 @@ final class MoBendsOptionsList120
         }
     }
 }
-// ?}

@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -47,4 +46,3 @@ public class ForgeModelRenderHelper implements IModelRenderHelper {
         return ItemRenderer.getArmorFoilBuffer(source, type, true, hasFoil);
     }
 }
-// ?}

@@ -10,7 +10,8 @@ final class Tier2ModelResolver {
 
     private Tier2ModelResolver() {}
 
-    @Nullable static ModelPart findRoot(Model model) {
+    @Nullable
+    static ModelPart findRoot(Model model) {
         try {
             for (String fieldName : ROOT_FIELDS) {
                 try {
@@ -37,7 +38,8 @@ final class Tier2ModelResolver {
         return null;
     }
 
-    @Nullable static ModelPart findPart(ModelPart root, String... names) {
+    @Nullable
+    static ModelPart findPart(ModelPart root, String... names) {
         for (String name : names) {
             try {
                 ModelPart child = root.getChild(name);

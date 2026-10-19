@@ -84,26 +84,7 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
                 float yaw =
                         Mth.clamp(headYaw - 0.1F * direction * RADIANS_TO_DEGREES, -60.0F, 60.0F);
                 float roll = 0.0F;
-                // ? if >=26.1.2 {
-                /*if (entity != null) {
-                    KineticWeapon kineticWeapon =
-                            entity.getUseItem().get(DataComponents.KINETIC_WEAPON);
-                    if (kineticWeapon != null) {
-                        SpearUseParams params =
-                                SpearUseParams.from(kineticWeapon, entity.getTicksUsingItem());
-                        yaw += -direction * params.swayScaleFast * params.swayIntensity;
-                        roll += -direction * params.swayScaleSlow * params.swayIntensity * 0.5F;
-                        pitch +=
-                                -40.0F * params.raiseProgressStart
-                                        + 30.0F * params.raiseProgressMiddle
-                                        - 20.0F * params.raiseProgressEnd
-                                        + 20.0F * params.lowerProgress
-                                        + 10.0F * params.raiseBackProgress
-                                        + 0.6F * params.swayScaleSlow * params.swayIntensity;
-                    }
-                }
-                */
-                // ?}
+
                 mainArm.rotation.setSmoothness(0.8F).orientX(pitch).rotateY(yaw);
                 if (roll != 0.0F) {
                     mainArm.rotation.rotateZ(roll);
@@ -151,72 +132,7 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
         }
 
         ItemStack itemStack = entity.getUseItem();
-        // ? if >1.20.1
+
         return Math.max(1.0F, CrossbowItem.getChargeDuration(itemStack, entity));
-        // ? if <=1.20.1
-        /*return Math.max(1.0F, CrossbowItem.getChargeDuration(itemStack));*/
     }
-
-    // ? if >=26.1.2 {
-    /*private record SpearUseParams(
-            float raiseProgressStart,
-            float raiseProgressMiddle,
-            float raiseProgressEnd,
-            float lowerProgress,
-            float raiseBackProgress,
-            float swayIntensity,
-            float swayScaleSlow,
-            float swayScaleFast) {
-        private static SpearUseParams from(KineticWeapon weapon, float time) {
-            int finishRaisingTick = weapon.delayTicks();
-            int finishSwayingTick =
-                    weapon.dismountConditions()
-                                    .map(KineticWeapon.Condition::maxDurationTicks)
-                                    .orElse(0)
-                            + finishRaisingTick;
-            int startSwayingTick = finishSwayingTick - 20;
-            int finishLoweringTick =
-                    weapon.knockbackConditions()
-                                    .map(KineticWeapon.Condition::maxDurationTicks)
-                                    .orElse(0)
-                            + finishRaisingTick;
-            int startLoweringTick = finishLoweringTick - 40;
-            int finishRaisingBackTick =
-                    weapon.damageConditions()
-                                    .map(KineticWeapon.Condition::maxDurationTicks)
-                                    .orElse(0)
-                            + finishRaisingTick;
-
-            float raiseProgress = progress(time, 0.0F, finishRaisingTick);
-            float raiseProgressStart = progress(raiseProgress, 0.0F, 0.5F);
-            float raiseProgressMiddle = progress(raiseProgress, 0.5F, 0.8F);
-            float raiseProgressEnd = progress(raiseProgress, 0.8F, 1.0F);
-            float swayProgress = progress(time, startSwayingTick, finishSwayingTick);
-            float lowerProgress =
-                    Ease.outCubic(
-                            Ease.inOutElastic(
-                                    progress(time - 20.0F, startLoweringTick, finishLoweringTick)));
-            float raiseBackProgress =
-                    progress(time, finishRaisingBackTick - 5, finishRaisingBackTick);
-            float swayIntensity =
-                    2.0F * Ease.outCirc(swayProgress) - 2.0F * Ease.inCirc(raiseBackProgress);
-            float swayScaleSlow = Mth.sin(time * 19.0F / RADIANS_TO_DEGREES) * swayIntensity;
-            float swayScaleFast = Mth.sin(time * 30.0F / RADIANS_TO_DEGREES) * swayIntensity;
-            return new SpearUseParams(
-                    raiseProgressStart,
-                    raiseProgressMiddle,
-                    raiseProgressEnd,
-                    lowerProgress,
-                    raiseBackProgress,
-                    swayIntensity,
-                    swayScaleSlow,
-                    swayScaleFast);
-        }
-
-        private static float progress(float time, float start, float end) {
-            return Mth.clamp(Mth.inverseLerp(time, start, end), 0.0F, 1.0F);
-        }
-    }
-    */
-    // ?}
 }

@@ -1,60 +1,21 @@
-plugins {
-    base
-    id("com.diffplug.spotless") version "8.9.0"
-}
+import com.diffplug.gradle.spotless.SpotlessExtension
+import com.diffplug.spotless.LineEnding
+import net.neoforged.moddevgradle.dsl.NeoForgeExtension
 
-apply(from = "gradle/formatting.gradle")
-
-repositories {
-    mavenCentral()
-}
-
-val targets = listOf("1.20.1-forge", "1.21.1-neoforge", "26.1.2-neoforge", "26.2-fabric", "26.2-neoforge")
-val verifyRepositoryProfiles =
-    tasks.register<Exec>("verifyRepositoryProfiles") {
-        group = "verification"
-        commandLine(
-            "pwsh.exe",
-            "-NoProfile",
-            "-File",
-            layout.projectDirectory
-                .file("eng/runtime/Verify-Profiles.ps1")
-                .asFile.absolutePath,
-        )
+// These formats contain LF text only; batch wrappers retain their template CRLF bytes.
+allprojects {
+    pluginManager.withPlugin("com.diffplug.spotless") {
+        extensions.configure<SpotlessExtension> { lineEndings = LineEnding.UNIX }
     }
-tasks.register<Exec>("stageRepositoryProfiles") {
-    group = "verification"
-    commandLine(
-        "pwsh.exe",
-        "-NoProfile",
-        "-File",
-        layout.projectDirectory
-            .file("eng/runtime/Stage-Profile.ps1")
-            .asFile.absolutePath,
-    )
 }
-val verifyTargets =
-    tasks.register<Exec>("verifyTargets") {
-        group = "verification"
-        dependsOn(verifyRepositoryProfiles)
-        commandLine(
-            "pwsh.exe",
-            "-NoProfile",
-            "-File",
-            layout.projectDirectory
-                .file("eng/Verify-Layout.ps1")
-                .asFile.absolutePath,
-        )
-    }
-for ((aggregate, task) in mapOf(
-    "testAll" to "test",
-    "checkAll" to "check",
-    "buildAll" to "build",
-    "collectArtifacts" to "buildAndCollect",
-)) {
-    tasks.register(aggregate) {
-        group = if (task == "test" || task == "check") "verification" else "build"
-        dependsOn(verifyTargets, targets.map { ":version:$it:$task" })
-        if (task == "check") dependsOn("spotlessCheck")
+
+// Bootstrap is deliberately MCP-only; the ordinary validation and daily runs keep the product.
+project(":version:26.3-neoforge") {
+    pluginManager.withPlugin("net.neoforged.moddev") {
+        extensions.configure<NeoForgeExtension> {
+            runs.configureEach {
+                if (name == "validationSmokeMcpBootstrapClient") loadedMods.set(emptySet())
+            }
+        }
     }
 }

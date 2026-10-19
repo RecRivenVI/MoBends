@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -104,7 +103,8 @@ public class ForgePlatformServices implements IPlatformServices {
     }
 
     @Override
-    @Nullable public IEntity wrapEntity(Object nativeEntity) {
+    @Nullable
+    public IEntity wrapEntity(Object nativeEntity) {
         if (nativeEntity instanceof Entity entity) {
             return new McEntity(entity);
         }
@@ -112,7 +112,8 @@ public class ForgePlatformServices implements IPlatformServices {
     }
 
     @Override
-    @Nullable public ILivingEntity wrapLivingEntity(Object nativeEntity) {
+    @Nullable
+    public ILivingEntity wrapLivingEntity(Object nativeEntity) {
         if (nativeEntity instanceof LivingEntity entity) {
             return new McLivingEntity(entity);
         }
@@ -120,7 +121,8 @@ public class ForgePlatformServices implements IPlatformServices {
     }
 
     @Override
-    @Nullable public IPlayer wrapPlayer(Object nativeEntity) {
+    @Nullable
+    public IPlayer wrapPlayer(Object nativeEntity) {
         if (nativeEntity instanceof Player player) {
             return new McPlayer(player);
         }
@@ -174,7 +176,8 @@ public class ForgePlatformServices implements IPlatformServices {
     }
 
     @Override
-    @Nullable public IResourcePath parseResourcePath(String location) {
+    @Nullable
+    public IResourcePath parseResourcePath(String location) {
         try {
             ResourceLocation loc = VersionAdapter.Holder.get().parseResourceLocation(location);
             return new McResourcePath(loc);
@@ -208,4 +211,3 @@ public class ForgePlatformServices implements IPlatformServices {
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
     }
 }
-// ?}

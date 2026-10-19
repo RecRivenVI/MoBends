@@ -180,9 +180,6 @@ public class ModelPartTransform implements IModelPart {
 
         TransformUtils.rotate(matrix, this.preRotation.getSmooth());
         TransformUtils.rotate(matrix, this.rotation.getSmooth());
-
-        /*if(this.scale.x != 0.0F || this.scale.y != 0.0F || this.scale.z != 0.0F)
-        TransformUtils.scale(dest, this.scale.x, this.scale.y, this.scale.z, dest);*/
     }
 
     @Override

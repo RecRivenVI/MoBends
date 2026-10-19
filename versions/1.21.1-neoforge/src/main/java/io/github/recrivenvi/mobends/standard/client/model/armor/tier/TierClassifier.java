@@ -174,7 +174,8 @@ public class TierClassifier {
     }
 
     /** Get the currently forced tier, or null if not forcing. */
-    @Nullable public RenderTier getForcedTier() {
+    @Nullable
+    public RenderTier getForcedTier() {
         return forcedTier;
     }
 

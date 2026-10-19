@@ -1,0 +1,24 @@
+[customskinloader-bootstrap]
+version = "15.0.1"
+description = "标准客户端的真实第三方皮肤测试输入；不是产品依赖"
+source = "https://github.com/xfl03/MCCustomSkinLoader/releases/tag/v15.0.1"
+sha256 = ["026d8b38ea93edccd647f60568193e79801a377b7bd4e916dcfc0d5482b767fc"]
+
+[modmenu]
+version = "21.0.0"
+description = "26.3 Fabric 标准客户端的菜单测试输入；保留已有可选集成"
+source = "https://modrinth.com/mod/modmenu/version/21.0.0"
+sha256 = ["837812c6c98d66141db7b5dcae668f27fb78d557e8f4c0c89912985fc26a5e6f"]
+
+[minecraft_protocol_probe]
+version = "0.0.1-phase8"
+description = "固定 alpha 快照的 26.3 NeoForge 自动化控制输入；不进入产品"
+source = "MineCraftProtocol/Alpha/20261019-1245-bfdda69c"
+sha256 = ["8b443fa8925a1305360fb907b4e4ed7a95bc536ef4414f3cc16f57d350bee158"]
+
+[customskinloader-acceptance]
+mod-id = "customskinloader-bootstrap"
+version = "15.1"
+description = "用户验收专用的 26.3 皮肤测试输入；来自 Modrinth，不是产品依赖"
+source = "https://modrinth.com/mod/customskinloader/version/yyYvYfZI"
+sha256 = ["c8769a38b3cc1da2a7b2f5827d1a53a24cd1ef6d0784b1eb545569f5882a2ffb"]

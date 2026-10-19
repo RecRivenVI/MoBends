@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import io.github.recrivenvi.mobends.api.rendering.IArmorLayerProvider;
@@ -28,4 +27,3 @@ public class ForgeArmorLayerProvider implements IArmorLayerProvider {
         return false;
     }
 }
-// ?}

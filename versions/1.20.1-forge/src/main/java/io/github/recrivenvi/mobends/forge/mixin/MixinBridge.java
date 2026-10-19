@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -230,4 +229,3 @@ public final class MixinBridge {
         return null;
     }
 }
-// ?}

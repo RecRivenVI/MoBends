@@ -8,9 +8,9 @@ public final class ScreenNavigator {
     private ScreenNavigator() {}
 
     public static void show(Screen screen) {
-        // ? if >=26.2
+
         // Minecraft.getInstance().gui.setScreen(screen);
-        // ? if <26.2
+
         Minecraft.getInstance().setScreen(screen);
     }
 }

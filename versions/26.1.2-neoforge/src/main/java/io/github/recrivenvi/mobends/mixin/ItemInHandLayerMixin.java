@@ -1,4 +1,3 @@
-// ? if target_26_1_2_neoforge || target_26_2_fabric || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -63,4 +62,3 @@ public abstract class ItemInHandLayerMixin {
         }
     }
 }
-// ?}

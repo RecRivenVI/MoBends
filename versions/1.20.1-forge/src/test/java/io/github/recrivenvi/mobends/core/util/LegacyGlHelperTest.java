@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge || target_1_21_1_neoforge {
 package io.github.recrivenvi.mobends.core.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,4 +26,3 @@ public class LegacyGlHelperTest {
         }
     }
 }
-// ?}

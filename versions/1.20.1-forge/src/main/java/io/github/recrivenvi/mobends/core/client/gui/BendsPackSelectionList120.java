@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.core.client.gui;
 
 import io.github.recrivenvi.mobends.core.pack.LocalBendsPack;
@@ -180,4 +179,3 @@ final class BendsPackSelectionList120
         }
     }
 }
-// ?}

@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -64,4 +63,3 @@ public class ForgeVersionAdapter implements VersionAdapter {
         return itemStack.isEdible();
     }
 }
-// ?}

@@ -68,11 +68,13 @@ public class ArmorStructureCache {
             return creationTime;
         }
 
-        @Nullable public PartClassification getClassification(String partName) {
+        @Nullable
+        public PartClassification getClassification(String partName) {
             return partClassifications.get(partName);
         }
 
-        @Nullable public BoneRegion getBoneForPart(String partName) {
+        @Nullable
+        public BoneRegion getBoneForPart(String partName) {
             return partToBoneMap.get(partName);
         }
     }
@@ -90,7 +92,8 @@ public class ArmorStructureCache {
      * @param modelClass The model class to look up
      * @return Cached entry, or null if not cached
      */
-    @Nullable public StructureEntry get(Class<?> modelClass) {
+    @Nullable
+    public StructureEntry get(Class<?> modelClass) {
         StructureEntry entry = cache.get(modelClass);
         if (entry != null) {
             hits++;

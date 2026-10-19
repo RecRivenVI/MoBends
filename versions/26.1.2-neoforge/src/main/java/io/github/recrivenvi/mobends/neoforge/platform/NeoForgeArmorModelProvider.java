@@ -1,26 +1,3 @@
-// ? if target_1_21_1_neoforge {
-/*package io.github.recrivenvi.mobends.neoforge.platform;
-
-import io.github.recrivenvi.mobends.api.armor.IArmorModelProvider;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-
-//
-// NeoForge 1.21.1 implementation of IArmorModelProvider.
-//
-// <p>Returns the default model. Custom model handling in NeoForge 1.21.1 is done through the
-// data-driven armor system.
-//
-public class NeoForgeArmorModelProvider implements IArmorModelProvider {
-    @Override
-    public <E extends LivingEntity> HumanoidModel<E> getCustomArmorModel(
-            E entity, ItemStack itemStack, EquipmentSlot slot, HumanoidModel<E> defaultModel) {
-        return defaultModel;
-    }
-}*/
-// ?} else if target_26_1_2_neoforge || target_26_2_neoforge {
 package io.github.recrivenvi.mobends.neoforge.platform;
 
 import io.github.recrivenvi.mobends.api.armor.IArmorModelProvider;
@@ -50,4 +27,3 @@ public class NeoForgeArmorModelProvider implements IArmorModelProvider {
                 .getGenericArmorModel(itemStack, layerType, (Model) defaultModel);
     }
 }
-// ?}

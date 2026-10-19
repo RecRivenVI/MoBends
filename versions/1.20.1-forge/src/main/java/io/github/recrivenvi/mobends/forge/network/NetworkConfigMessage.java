@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.network;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,4 +16,3 @@ public record NetworkConfigMessage(
                 buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
     }
 }
-// ?}

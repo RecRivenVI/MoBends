@@ -49,7 +49,8 @@ public class TriggerConditionRegistry {
         pureRegistry.put(key, condition);
     }
 
-    @Nullable public Type getTemplateClass(String key) {
+    @Nullable
+    public Type getTemplateClass(String key) {
         if (registry.containsKey(key)) {
             return registry.get(key).templateType;
         }

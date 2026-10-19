@@ -1,6 +1,6 @@
 {
-  "pack": {
-    "description": "Mo' Bends resources",
-    ${pack_format_fields}
-  }
+    "pack": {
+        "description": "Mo' Bends assets",
+        "pack_format": 34
+    }
 }

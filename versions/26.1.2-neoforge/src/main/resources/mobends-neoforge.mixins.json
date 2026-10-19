@@ -1,14 +1,19 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "io.github.recrivenvi.mobends.mixin",
-  "compatibilityLevel": "JAVA_${java_version}",
-  ${neoforge_refmap_field}
-  "mixins": [],
-  "client": [
-    ${neoforge_client_mixins}
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "minVersion": "0.8",
+    "package": "io.github.recrivenvi.mobends.mixin",
+    "compatibilityLevel": "JAVA_25",
+    "mixins": [],
+    "client": [
+        "armor.ModelPartAccessor",
+        "AvatarRendererMixin",
+        "ArrowRendererMixin",
+        "ItemInHandLayerMixin",
+        "LivingEntityRendererMixin",
+        "ModelFeatureRendererMixin",
+        "RenderTypeAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }

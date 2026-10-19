@@ -12,5 +12,6 @@ import javax.annotation.Nullable;
  */
 public interface IAnimationController<T extends EntityData<?>> {
 
-    @Nullable Collection<String> perform(T entityData);
+    @Nullable
+    Collection<String> perform(T entityData);
 }

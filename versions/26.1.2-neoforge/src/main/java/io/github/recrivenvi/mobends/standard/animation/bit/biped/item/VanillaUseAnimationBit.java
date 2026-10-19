@@ -3,16 +3,13 @@ package io.github.recrivenvi.mobends.standard.animation.bit.biped.item;
 import io.github.recrivenvi.mobends.core.animation.bit.AnimationBit;
 import io.github.recrivenvi.mobends.core.client.model.ModelPartTransform;
 import io.github.recrivenvi.mobends.standard.data.BipedEntityData;
-// ? if >=26.1.2 {
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Ease;
-// ?}
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
-// ? if >=26.1.2
 import net.minecraft.world.item.component.KineticWeapon;
 
 /** Applies the current Minecraft arm-pose formulas to the segmented Mo' Bends arms. */
@@ -90,7 +87,7 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
                 float yaw =
                         Mth.clamp(headYaw - 0.1F * direction * RADIANS_TO_DEGREES, -60.0F, 60.0F);
                 float roll = 0.0F;
-                // ? if >=26.1.2 {
+
                 if (entity != null) {
                     KineticWeapon kineticWeapon =
                             entity.getUseItem().get(DataComponents.KINETIC_WEAPON);
@@ -108,7 +105,7 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
                                         + 0.6F * params.swayScaleSlow * params.swayIntensity;
                     }
                 }
-                // ?}
+
                 mainArm.rotation.setSmoothness(0.8F).orientX(pitch).rotateY(yaw);
                 if (roll != 0.0F) {
                     mainArm.rotation.rotateZ(roll);
@@ -156,13 +153,10 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
         }
 
         ItemStack itemStack = entity.getUseItem();
-        // ? if >1.20.1
+
         return Math.max(1.0F, CrossbowItem.getChargeDuration(itemStack, entity));
-        // ? if <=1.20.1
-        /*return Math.max(1.0F, CrossbowItem.getChargeDuration(itemStack));*/
     }
 
-    // ? if >=26.1.2 {
     private record SpearUseParams(
             float raiseProgressStart,
             float raiseProgressMiddle,
@@ -222,5 +216,4 @@ public final class VanillaUseAnimationBit extends AnimationBit<BipedEntityData<?
             return Mth.clamp(Mth.inverseLerp(time, start, end), 0.0F, 1.0F);
         }
     }
-    // ?}
 }

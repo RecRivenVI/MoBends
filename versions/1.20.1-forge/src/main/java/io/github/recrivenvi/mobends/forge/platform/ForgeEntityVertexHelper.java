@@ -1,4 +1,3 @@
-// ? if target_1_20_1_forge {
 package io.github.recrivenvi.mobends.forge.platform;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -39,4 +38,3 @@ public class ForgeEntityVertexHelper implements IEntityVertexHelper {
                 x, y, z, red, green, blue, alpha, u, v, overlay, light, normalX, normalY, normalZ);
     }
 }
-// ?}

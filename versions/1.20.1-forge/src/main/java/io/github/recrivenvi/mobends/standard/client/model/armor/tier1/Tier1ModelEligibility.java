@@ -8,7 +8,8 @@ import net.minecraft.client.model.Model;
 final class Tier1ModelEligibility {
     private Tier1ModelEligibility() {}
 
-    @Nullable static HumanoidModel<?> asHumanoid(Model model) {
+    @Nullable
+    static HumanoidModel<?> asHumanoid(Model model) {
         return model instanceof HumanoidModel<?> humanoidModel ? humanoidModel : null;
     }
 }

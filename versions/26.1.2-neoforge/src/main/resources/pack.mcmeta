@@ -1,6 +1,13 @@
 {
-  "pack": {
-    "description": "Mo' Bends resources",
-    ${pack_format_fields}
-  }
+    "pack": {
+        "description": "Mo' Bends assets",
+        "min_format": [
+            84,
+            0
+        ],
+        "max_format": [
+            84,
+            0
+        ]
+    }
 }

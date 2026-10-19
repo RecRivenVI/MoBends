@@ -1,0 +1,41 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${mod_version}",
+    "name": "${mod_name}",
+    "description": "${mod_description}",
+    "authors": [
+        "${mod_authors}"
+    ],
+    "contact": {
+        "homepage": "https://github.com/RecRivenVI/MoBends",
+        "sources": "https://github.com/RecRivenVI/MoBends",
+        "issues": "https://github.com/RecRivenVI/MoBends/issues"
+    },
+    "license": "${mod_license}",
+    "icon": "assets/mobends/textures/logo512.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "${mod_group}.fabric.main.MoBends"
+        ],
+        "client": [
+            "${mod_group}.fabric.main.MoBendsClient"
+        ],
+        "modmenu": [
+            "${mod_group}.fabric.client.MoBendsModMenu"
+        ]
+    },
+    "mixins": [
+        {
+            "config": "mobends-fabric.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}",
+        "fabric-api": ">=${fabric_api_version}"
+    }
+}

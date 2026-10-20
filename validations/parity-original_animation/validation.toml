@@ -1,0 +1,10 @@
+tool = "acceptance_checks"
+targets = ["26.3-neoforge"]
+
+[instances.client]
+memory-max = "3G"
+width = 1920
+height = 1080
+player-name = "RecRivenVI"
+mods = ["minecraft_protocol_probe-fidelity"]
+jvm-args = ["-Dmobends.probe.observeOnly=true"]

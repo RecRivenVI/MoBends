@@ -16,6 +16,13 @@ description = "固定 alpha 快照的 26.3 NeoForge 自动化控制输入；不�
 source = "MineCraftProtocol/Alpha/20261019-1245-bfdda69c"
 sha256 = ["8b443fa8925a1305360fb907b4e4ed7a95bc536ef4414f3cc16f57d350bee158"]
 
+[minecraft_protocol_probe-fidelity]
+mod-id = "minecraft_protocol_probe"
+version = "0.0.1-phase8"
+description = "保真审查专用的固定 alpha 20261020-0422-52bc024f；不进入产品"
+source = "MineCraftProtocol/Alpha/20261020-0422-52bc024f"
+sha256 = ["fd7f7dc6c5c1563955837fd4a932b57c350e3181eaf45bfac1c2ea9d0af0e4a0"]
+
 [customskinloader-acceptance]
 mod-id = "customskinloader-bootstrap"
 version = "15.1"
